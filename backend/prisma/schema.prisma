@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  MANAGEMENT
+  PRODUCTION
+  MERCHANDISE
+  MARKETING
+}
+
+enum AccountStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum AuditActionType {
+  REGISTERED
+  APPROVED
+  REJECTED
+  SUSPENDED
+  ROLE_CHANGED
+  PASSWORD_CHANGED
+  LOGIN_ATTEMPT
+  LOGIN_FAILED
+}
+
+model User {
+  id                String        @id @default(uuid())
+  email             String        @unique
+  passwordHash      String
+  name              String
+  role              Role          @default(PRODUCTION)
+  status            AccountStatus @default(PENDING)
+  department        String?
+  isPasswordChanged Boolean       @default(false)
+  loginAttempts     Int           @default(0)
+  lastLoginAt       DateTime?
+  lastLoginIp       String?
+  lockedUntil       DateTime?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime?      @updatedAt
+
+  refreshTokens RefreshToken[]
+  auditLogs     AuditLog[]
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model AuditLog {
+  id            String            @id @default(uuid())
+  userId        String
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  actionType    AuditActionType
+  actionDetails String?
+  performedBy   String?
+  ipAddress     String?
+  timestamp     DateTime          @default(now())
+
+  @@index([userId])
+  @@index([timestamp])
+  @@index([actionType])
+}
