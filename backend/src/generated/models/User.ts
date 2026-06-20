@@ -247,7 +247,7 @@ export type UserGroupByOutputType = {
   lastLoginIp: string | null
   lockedUntil: Date | null
   createdAt: Date
-  updatedAt: Date
+  updatedAt: Date | null
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -287,7 +287,7 @@ export type UserWhereInput = {
   lastLoginIp?: Prisma.StringNullableFilter<"User"> | string | null
   lockedUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
 }
@@ -306,7 +306,7 @@ export type UserOrderByWithRelationInput = {
   lastLoginIp?: Prisma.SortOrderInput | Prisma.SortOrder
   lockedUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
 }
@@ -328,7 +328,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   lastLoginIp?: Prisma.StringNullableFilter<"User"> | string | null
   lockedUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
 }, "id" | "email">
@@ -347,7 +347,7 @@ export type UserOrderByWithAggregationInput = {
   lastLoginIp?: Prisma.SortOrderInput | Prisma.SortOrder
   lockedUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -372,7 +372,7 @@ export type UserScalarWhereWithAggregatesInput = {
   lastLoginIp?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   lockedUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
 }
 
 export type UserCreateInput = {
@@ -389,7 +389,7 @@ export type UserCreateInput = {
   lastLoginIp?: string | null
   lockedUntil?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
 }
@@ -408,7 +408,7 @@ export type UserUncheckedCreateInput = {
   lastLoginIp?: string | null
   lockedUntil?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
 }
@@ -427,7 +427,7 @@ export type UserUpdateInput = {
   lastLoginIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
 }
@@ -446,7 +446,7 @@ export type UserUncheckedUpdateInput = {
   lastLoginIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -465,7 +465,7 @@ export type UserCreateManyInput = {
   lastLoginIp?: string | null
   lockedUntil?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -482,7 +482,7 @@ export type UserUpdateManyMutationInput = {
   lastLoginIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -499,7 +499,7 @@ export type UserUncheckedUpdateManyInput = {
   lastLoginIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -644,7 +644,7 @@ export type UserCreateWithoutRefreshTokensInput = {
   lastLoginIp?: string | null
   lockedUntil?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
 }
 
@@ -662,7 +662,7 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   lastLoginIp?: string | null
   lockedUntil?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -696,7 +696,7 @@ export type UserUpdateWithoutRefreshTokensInput = {
   lastLoginIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
 }
 
@@ -714,7 +714,7 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   lastLoginIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -732,7 +732,7 @@ export type UserCreateWithoutAuditLogsInput = {
   lastLoginIp?: string | null
   lockedUntil?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
 }
 
@@ -750,7 +750,7 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   lastLoginIp?: string | null
   lockedUntil?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -784,7 +784,7 @@ export type UserUpdateWithoutAuditLogsInput = {
   lastLoginIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
 }
 
@@ -802,7 +802,7 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   lastLoginIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -946,7 +946,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     lastLoginIp: string | null
     lockedUntil: Date | null
     createdAt: Date
-    updatedAt: Date
+    updatedAt: Date | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }

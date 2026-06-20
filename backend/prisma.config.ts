@@ -7,6 +7,7 @@ export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
+    seed: 'node ./prisma/seed.js',
   },
   datasource: {
     url: process.env["DATABASE_URL"] || "postgresql://postgres:admin123@localhost:5432/textileerp?schema=public",

@@ -85,3 +85,550 @@ model AuditLog {
   @@index([timestamp])
   @@index([actionType])
 }
+
+// ===== PRODUCTION DEPARTMENT ENUMS =====
+
+enum OrderStatus {
+  AUTHORIZED
+  MATERIAL_ALLOCATED
+  YARN_WEAVING_INPROGRESS
+  WET_PROCESSING_INPROGRESS
+  SURFACE_DECORATION_INPROGRESS
+  ASSEMBLY_INPROGRESS
+  QC_VERIFICATION_INPROGRESS
+  PS_SAMPLE_PENDING
+  PS_APPROVED
+  EXPORT_READY
+  CANCELLED
+  FAILED
+}
+
+enum RequisitionStatus {
+  PENDING
+  RELEASED
+  DISPATCHED
+  CANCELLED
+}
+
+enum YarnTwistingStatus {
+  NOT_REQUIRED
+  PENDING
+  INPROGRESS
+  COMPLETED
+}
+
+enum WeavingStatus {
+  PENDING
+  INPROGRESS
+  COMPLETED
+}
+
+enum WetProcessingStatus {
+  PENDING
+  INPROGRESS
+  PASSED
+  FAILED
+  DISPUTED
+}
+
+enum TestType {
+  COLOR_FASTNESS
+  SHRINKING
+  GASOLINE_SMELL
+}
+
+enum TestResult {
+  PASSED
+  FAILED
+  PENDING
+}
+
+enum DecorationType {
+  PRINTING
+  EMBROIDERY
+  BOTH
+  NONE
+}
+
+enum DecorLogStatus {
+  PENDING
+  INPROGRESS
+  RETURNED
+  DISCREPANCY_FLAGGED
+  COMPLETED
+}
+
+enum AssemblyPhase {
+  PHASE1_CUTTING
+  PHASE2_STITCHING
+  PHASE3_INITIAL_CHECK
+  PHASE4_FOLDING
+  PHASE5_FINAL_CHECK
+  PHASE6_PACKING
+}
+
+enum AssemblyPhaseStatus {
+  PENDING
+  INPROGRESS
+  COMPLETED
+}
+
+enum QcStatus {
+  PENDING
+  PASSED
+  FAILED
+  VERIFIED
+}
+
+enum AuditType {
+  STRUCTURAL
+  AESTHETIC
+  ASEPTIC
+}
+
+enum PsSampleStatus {
+  PENDING
+  SENT_TO_CUSTOMER
+  APPROVED
+  REJECTED
+  REWORK_INITIATED
+}
+
+enum DiscrepancyType {
+  PIECE_COUNT_MISMATCH
+  WEIGHT_VARIANCE
+  DIMENSION_MISMATCH
+  QUALITY_DEFECT
+}
+
+// ===== PRODUCTION DEPARTMENT MODELS =====
+
+model OrderToken {
+  id                    String                        @id @default(uuid())
+  orderNumber           String                        @unique
+  status                OrderStatus                   @default(AUTHORIZED)
+  isInstructionsLocked  Boolean                       @default(false)
+  isPsApproved          Boolean?
+  createdAt             DateTime                      @default(now())
+  updatedAt             DateTime                      @updatedAt
+  
+  // Relations
+  techPack              TechPack?
+  materialRequisitions  ProductionRequisition[]
+  loomOutputs           LoomOutputLog[]
+  wetProcessingLogs     WetProcessingLog[]
+  decorPrintingLogs     DecorPrintingLog[]
+  embroideryPieceLogs   EmbroideryPieceLog[]
+  assemblyJobCards      AssemblyJobCard[]
+  qcInspections         QcInspection[]
+  psLogs                PreShippingSample[]
+  discrepancyAlerts     DiscrepancyAlert[]
+  claimDisputes         ClaimDispute[]
+  
+  @@index([orderNumber])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model TechPack {
+  id                    String                @id @default(uuid())
+  orderTokenId          String                @unique
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  
+  // Specifications
+  yarnType              String
+  fabricType            String
+  gsm                   Decimal               @db.Decimal(10, 2)
+  totalYardage          Decimal               @db.Decimal(12, 2)
+  requiredYarnWeight    Decimal               @db.Decimal(12, 2) // in Kg
+  
+  // Feature flags
+  requiresYarnTwisting  Boolean               @default(false)
+  isPrintingRequired    Boolean               @default(false)
+  isEmbroideryRequired  Boolean               @default(false)
+  
+  // Pre-authorized master samples
+  preApprovedSampleId   String?
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  @@index([orderTokenId])
+}
+
+model WarehouseMaterialInventory {
+  id                    String                @id @default(uuid())
+  masterSampleCode      String                @unique
+  materialType          String                // e.g., "Yarn", "Accessory", "Packaging"
+  description           String
+  physicalVolume        Decimal               @db.Decimal(12, 2)
+  volumeUnit            String                // e.g., "Kg", "Meters", "Pieces"
+  preApprovedVolume     Decimal               @db.Decimal(12, 2)
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  @@index([masterSampleCode])
+  @@index([materialType])
+}
+
+model ProductionRequisition {
+  id                    String                @id @default(uuid())
+  orderTokenId          String
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  
+  status                RequisitionStatus     @default(PENDING)
+  requestedMaterialId   String?
+  requestedVolume       Decimal               @db.Decimal(12, 2)
+  volumeUnit            String
+  
+  // Authorization
+  approvalSignature     String?
+  approvedBy            String?
+  approvedAt            DateTime?
+  
+  // Dispatch
+  dispatchedAt          DateTime?
+  dispatchedBy          String?
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  // Relations
+  materialDispatchLogs  MaterialDispatchLog[]
+  
+  @@index([orderTokenId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model MaterialDispatchLog {
+  id                    String                @id @default(uuid())
+  requisitionId         String
+  requisition           ProductionRequisition @relation(fields: [requisitionId], references: [id], onDelete: Cascade)
+  
+  dispatchedVolume      Decimal               @db.Decimal(12, 2)
+  dispatchedAt          DateTime              @default(now())
+  receivedAt            DateTime?
+  receivedBy            String?
+  
+  createdAt             DateTime              @default(now())
+  
+  @@index([requisitionId])
+}
+
+model LoomOutputLog {
+  id                    String                @id @default(uuid())
+  orderTokenId          String
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  
+  // Yarn Twisting (if applicable)
+  yarnTwistingStatus    YarnTwistingStatus    @default(NOT_REQUIRED)
+  twistingLogDetails    String?
+  twistingCompletedAt   DateTime?
+  
+  // Weaving/Knitting
+  weavingStatus         WeavingStatus         @default(PENDING)
+  vendorId              String
+  dispatchedToVendor    DateTime
+  
+  // Raw Fabric Input
+  rollPieceCount        Int
+  totalMassWeight       Decimal               @db.Decimal(12, 2) // in Kg
+  fabricDensityGsm      Decimal               @db.Decimal(10, 2)
+  totalLength           Decimal               @db.Decimal(12, 2) // in Yards
+  
+  // PO Yield Target
+  poYieldTargetWeight   Decimal               @db.Decimal(12, 2)
+  
+  // Waste tracking
+  actualWasteWeight     Decimal?              @db.Decimal(12, 2)
+  wasteVarianceLogged   Boolean               @default(false)
+  
+  // Return from vendor
+  returnedAt            DateTime?
+  returnedStatus        WeavingStatus
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  @@index([orderTokenId])
+  @@index([weavingStatus])
+  @@index([createdAt])
+}
+
+model WetProcessingLog {
+  id                    String                @id @default(uuid())
+  orderTokenId          String
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  
+  status                WetProcessingStatus   @default(PENDING)
+  
+  // Dispatch to dyehouse
+  dispatchTrackId       String                @unique
+  dispatchedToMill      DateTime
+  dispatchedAt          DateTime              @default(now())
+  
+  // Input metrics
+  inputTotalWeight      Decimal               @db.Decimal(12, 2) // in Kg
+  
+  // Output metrics (after dyeing)
+  outputTotalWeight     Decimal?              @db.Decimal(12, 2) // in Kg
+  
+  // Weight loss calculation
+  weightLossPercentage  Decimal?              @db.Decimal(10, 2)
+  isWithinTolerance     Boolean?              // 9% - 11% tolerance
+  
+  // Return from vendor
+  returnedAt            DateTime?
+  returnedFrom          String?
+  
+  // Quality tests
+  qualityTests          QualityTestLog[]
+  
+  // Claim dispute if failed tolerance
+  claimDispute          ClaimDispute?
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  @@index([orderTokenId])
+  @@index([status])
+  @@index([dispatchTrackId])
+  @@index([createdAt])
+}
+
+model QualityTestLog {
+  id                    String                @id @default(uuid())
+  wetProcessingLogId    String
+  wetProcessingLog      WetProcessingLog      @relation(fields: [wetProcessingLogId], references: [id], onDelete: Cascade)
+  
+  testType              TestType
+  result                TestResult            @default(PENDING)
+  notes                 String?
+  testedBy              String?
+  testedAt              DateTime?
+  
+  createdAt             DateTime              @default(now())
+  
+  @@index([wetProcessingLogId])
+  @@index([testType])
+  @@index([result])
+}
+
+model DecorPrintingLog {
+  id                    String                @id @default(uuid())
+  orderTokenId          String
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  
+  status                DecorLogStatus        @default(PENDING)
+  
+  // Dispatch
+  dispatchedToVendor    DateTime
+  vendorId              String
+  
+  // Tracking
+  rollsSent             Int
+  rollsReturned         Int?
+  returnedAt            DateTime?
+  
+  // QA audit
+  specAuditCompleted    Boolean               @default(false)
+  specAuditNotes        String?
+  specAuditBy           String?
+  specAuditAt           DateTime?
+  
+  // Discrepancy
+  hasDiscrepancy        Boolean               @default(false)
+  discrepancyCount      Int?
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  @@index([orderTokenId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model EmbroideryPieceLog {
+  id                    String                @id @default(uuid())
+  orderTokenId          String
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  
+  status                DecorLogStatus        @default(PENDING)
+  
+  // Slicing from continuous roll
+  totalPiecesCut        Int
+  piecesPreStitched     Int?  // Must be >= 2 sides
+  preStitchBy           String?
+  preStitchAt           DateTime?
+  
+  // Dispatch
+  dispatchedToVendor    DateTime
+  vendorId              String
+  piecesSent            Int
+  
+  // Return
+  returnedAt            DateTime?
+  piecesReturned        Int?
+  
+  // Discrepancy tracking
+  hasDiscrepancy        Boolean               @default(false)
+  discrepancyCount      Int?
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  @@index([orderTokenId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model AssemblyJobCard {
+  id                    String                @id @default(uuid())
+  orderTokenId          String
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  
+  workerId              String
+  workerName            String
+  
+  // Piece-rate tracking
+  basePieceRate         Decimal               @db.Decimal(10, 2) // Base rate per piece
+  totalPiecesCompleted  Int                   @default(0)
+  calculatedWage        Decimal               @db.Decimal(12, 2) @default(0)
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  // Relations
+  assemblyLogs          AssemblyPhaseLog[]
+  
+  @@index([orderTokenId])
+  @@index([workerId])
+  @@index([createdAt])
+}
+
+model AssemblyPhaseLog {
+  id                    String                @id @default(uuid())
+  jobCardId             String
+  jobCard               AssemblyJobCard       @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+  
+  phase                 AssemblyPhase
+  status                AssemblyPhaseStatus   @default(PENDING)
+  
+  piecesProcessed       Int
+  startedAt             DateTime
+  completedAt           DateTime?
+  
+  createdAt             DateTime              @default(now())
+  
+  @@index([jobCardId])
+  @@index([phase])
+  @@index([status])
+}
+
+model QcInspection {
+  id                    String                @id @default(uuid())
+  orderTokenId          String
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  
+  status                QcStatus              @default(PENDING)
+  overallStatus         QcStatus              @default(PENDING)
+  
+  // Audit components (100% structural sweep)
+  structuralAudit       Json?
+  aestheticAudit        Json?
+  asepticAudit          Json?
+  
+  inspectionNotes       String?
+  inspectedBy           String?
+  inspectedAt           DateTime?
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  @@index([orderTokenId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+
+
+model PreShippingSample {
+  id                    String                @id @default(uuid())
+  orderTokenId          String
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  
+  status                PsSampleStatus        @default(PENDING)
+  
+  // 10% sampling rule
+  totalCargoUnits       Int
+  sampleSize            Decimal               @db.Decimal(10, 2) // 10% of cargo
+  sampleUnits           Int
+  
+  // Dispatch to customer
+  sentAt                DateTime?
+  sentTo                String?
+  
+  // Customer approval
+  customerApproval      Boolean?
+  customerApprovedAt    DateTime?
+  customerApprovedBy    String?
+  
+  // Rework if rejected
+  reworkInitiatedAt     DateTime?
+  reworkOrders          String? // Reference to rework order sheets
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  @@index([orderTokenId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model DiscrepancyAlert {
+  id                    String                @id @default(uuid())
+  orderTokenId          String
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  
+  discrepancyType       DiscrepancyType
+  description           String
+  
+  // Metrics
+  expectedQuantity      Decimal?              @db.Decimal(12, 2)
+  actualQuantity        Decimal?              @db.Decimal(12, 2)
+  variance              Decimal?              @db.Decimal(12, 2)
+  
+  flaggedAt             DateTime              @default(now())
+  flaggedBy             String
+  severity              String // "LOW", "MEDIUM", "HIGH"
+  
+  createdAt             DateTime              @default(now())
+  
+  @@index([orderTokenId])
+  @@index([discrepancyType])
+  @@index([severity])
+}
+
+model ClaimDispute {
+  id                    String                @id @default(uuid())
+  orderTokenId          String
+  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  wetProcessingLogId    String
+  wetProcessingLog      WetProcessingLog      @relation(fields: [wetProcessingLogId], references: [id], onDelete: Cascade)
+  
+  reason                String
+  weightLossPercentage  Decimal               @db.Decimal(10, 2)
+  expectedTolerance     String // "9% - 11%"
+  
+  claimAmount           Decimal?              @db.Decimal(12, 2)
+  claimStatus           String                @default("OPEN") // "OPEN", "RESOLVED", "DISPUTED"
+  
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  
+  @@index([orderTokenId])
+  @@index([claimStatus])
+  @@unique([wetProcessingLogId]) // One claim per wet processing log
+}

@@ -53,7 +53,23 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   RefreshToken: 'RefreshToken',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  OrderToken: 'OrderToken',
+  TechPack: 'TechPack',
+  WarehouseMaterialInventory: 'WarehouseMaterialInventory',
+  ProductionRequisition: 'ProductionRequisition',
+  MaterialDispatchLog: 'MaterialDispatchLog',
+  LoomOutputLog: 'LoomOutputLog',
+  WetProcessingLog: 'WetProcessingLog',
+  QualityTestLog: 'QualityTestLog',
+  DecorPrintingLog: 'DecorPrintingLog',
+  EmbroideryPieceLog: 'EmbroideryPieceLog',
+  AssemblyJobCard: 'AssemblyJobCard',
+  AssemblyPhaseLog: 'AssemblyPhaseLog',
+  QcInspection: 'QcInspection',
+  PreShippingSample: 'PreShippingSample',
+  DiscrepancyAlert: 'DiscrepancyAlert',
+  ClaimDispute: 'ClaimDispute'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -118,12 +134,303 @@ export const AuditLogScalarFieldEnum = {
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
 
 
+export const OrderTokenScalarFieldEnum = {
+  id: 'id',
+  orderNumber: 'orderNumber',
+  status: 'status',
+  isInstructionsLocked: 'isInstructionsLocked',
+  isPsApproved: 'isPsApproved',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrderTokenScalarFieldEnum = (typeof OrderTokenScalarFieldEnum)[keyof typeof OrderTokenScalarFieldEnum]
+
+
+export const TechPackScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  yarnType: 'yarnType',
+  fabricType: 'fabricType',
+  gsm: 'gsm',
+  totalYardage: 'totalYardage',
+  requiredYarnWeight: 'requiredYarnWeight',
+  requiresYarnTwisting: 'requiresYarnTwisting',
+  isPrintingRequired: 'isPrintingRequired',
+  isEmbroideryRequired: 'isEmbroideryRequired',
+  preApprovedSampleId: 'preApprovedSampleId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TechPackScalarFieldEnum = (typeof TechPackScalarFieldEnum)[keyof typeof TechPackScalarFieldEnum]
+
+
+export const WarehouseMaterialInventoryScalarFieldEnum = {
+  id: 'id',
+  masterSampleCode: 'masterSampleCode',
+  materialType: 'materialType',
+  description: 'description',
+  physicalVolume: 'physicalVolume',
+  volumeUnit: 'volumeUnit',
+  preApprovedVolume: 'preApprovedVolume',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WarehouseMaterialInventoryScalarFieldEnum = (typeof WarehouseMaterialInventoryScalarFieldEnum)[keyof typeof WarehouseMaterialInventoryScalarFieldEnum]
+
+
+export const ProductionRequisitionScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  status: 'status',
+  requestedMaterialId: 'requestedMaterialId',
+  requestedVolume: 'requestedVolume',
+  volumeUnit: 'volumeUnit',
+  approvalSignature: 'approvalSignature',
+  approvedBy: 'approvedBy',
+  approvedAt: 'approvedAt',
+  dispatchedAt: 'dispatchedAt',
+  dispatchedBy: 'dispatchedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductionRequisitionScalarFieldEnum = (typeof ProductionRequisitionScalarFieldEnum)[keyof typeof ProductionRequisitionScalarFieldEnum]
+
+
+export const MaterialDispatchLogScalarFieldEnum = {
+  id: 'id',
+  requisitionId: 'requisitionId',
+  dispatchedVolume: 'dispatchedVolume',
+  dispatchedAt: 'dispatchedAt',
+  receivedAt: 'receivedAt',
+  receivedBy: 'receivedBy',
+  createdAt: 'createdAt'
+} as const
+
+export type MaterialDispatchLogScalarFieldEnum = (typeof MaterialDispatchLogScalarFieldEnum)[keyof typeof MaterialDispatchLogScalarFieldEnum]
+
+
+export const LoomOutputLogScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  yarnTwistingStatus: 'yarnTwistingStatus',
+  twistingLogDetails: 'twistingLogDetails',
+  twistingCompletedAt: 'twistingCompletedAt',
+  weavingStatus: 'weavingStatus',
+  vendorId: 'vendorId',
+  dispatchedToVendor: 'dispatchedToVendor',
+  rollPieceCount: 'rollPieceCount',
+  totalMassWeight: 'totalMassWeight',
+  fabricDensityGsm: 'fabricDensityGsm',
+  totalLength: 'totalLength',
+  poYieldTargetWeight: 'poYieldTargetWeight',
+  actualWasteWeight: 'actualWasteWeight',
+  wasteVarianceLogged: 'wasteVarianceLogged',
+  returnedAt: 'returnedAt',
+  returnedStatus: 'returnedStatus',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LoomOutputLogScalarFieldEnum = (typeof LoomOutputLogScalarFieldEnum)[keyof typeof LoomOutputLogScalarFieldEnum]
+
+
+export const WetProcessingLogScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  status: 'status',
+  dispatchTrackId: 'dispatchTrackId',
+  dispatchedToMill: 'dispatchedToMill',
+  dispatchedAt: 'dispatchedAt',
+  inputTotalWeight: 'inputTotalWeight',
+  outputTotalWeight: 'outputTotalWeight',
+  weightLossPercentage: 'weightLossPercentage',
+  isWithinTolerance: 'isWithinTolerance',
+  returnedAt: 'returnedAt',
+  returnedFrom: 'returnedFrom',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WetProcessingLogScalarFieldEnum = (typeof WetProcessingLogScalarFieldEnum)[keyof typeof WetProcessingLogScalarFieldEnum]
+
+
+export const QualityTestLogScalarFieldEnum = {
+  id: 'id',
+  wetProcessingLogId: 'wetProcessingLogId',
+  testType: 'testType',
+  result: 'result',
+  notes: 'notes',
+  testedBy: 'testedBy',
+  testedAt: 'testedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type QualityTestLogScalarFieldEnum = (typeof QualityTestLogScalarFieldEnum)[keyof typeof QualityTestLogScalarFieldEnum]
+
+
+export const DecorPrintingLogScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  status: 'status',
+  dispatchedToVendor: 'dispatchedToVendor',
+  vendorId: 'vendorId',
+  rollsSent: 'rollsSent',
+  rollsReturned: 'rollsReturned',
+  returnedAt: 'returnedAt',
+  specAuditCompleted: 'specAuditCompleted',
+  specAuditNotes: 'specAuditNotes',
+  specAuditBy: 'specAuditBy',
+  specAuditAt: 'specAuditAt',
+  hasDiscrepancy: 'hasDiscrepancy',
+  discrepancyCount: 'discrepancyCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DecorPrintingLogScalarFieldEnum = (typeof DecorPrintingLogScalarFieldEnum)[keyof typeof DecorPrintingLogScalarFieldEnum]
+
+
+export const EmbroideryPieceLogScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  status: 'status',
+  totalPiecesCut: 'totalPiecesCut',
+  piecesPreStitched: 'piecesPreStitched',
+  preStitchBy: 'preStitchBy',
+  preStitchAt: 'preStitchAt',
+  dispatchedToVendor: 'dispatchedToVendor',
+  vendorId: 'vendorId',
+  piecesSent: 'piecesSent',
+  returnedAt: 'returnedAt',
+  piecesReturned: 'piecesReturned',
+  hasDiscrepancy: 'hasDiscrepancy',
+  discrepancyCount: 'discrepancyCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmbroideryPieceLogScalarFieldEnum = (typeof EmbroideryPieceLogScalarFieldEnum)[keyof typeof EmbroideryPieceLogScalarFieldEnum]
+
+
+export const AssemblyJobCardScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  workerId: 'workerId',
+  workerName: 'workerName',
+  basePieceRate: 'basePieceRate',
+  totalPiecesCompleted: 'totalPiecesCompleted',
+  calculatedWage: 'calculatedWage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssemblyJobCardScalarFieldEnum = (typeof AssemblyJobCardScalarFieldEnum)[keyof typeof AssemblyJobCardScalarFieldEnum]
+
+
+export const AssemblyPhaseLogScalarFieldEnum = {
+  id: 'id',
+  jobCardId: 'jobCardId',
+  phase: 'phase',
+  status: 'status',
+  piecesProcessed: 'piecesProcessed',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type AssemblyPhaseLogScalarFieldEnum = (typeof AssemblyPhaseLogScalarFieldEnum)[keyof typeof AssemblyPhaseLogScalarFieldEnum]
+
+
+export const QcInspectionScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  status: 'status',
+  overallStatus: 'overallStatus',
+  structuralAudit: 'structuralAudit',
+  aestheticAudit: 'aestheticAudit',
+  asepticAudit: 'asepticAudit',
+  inspectionNotes: 'inspectionNotes',
+  inspectedBy: 'inspectedBy',
+  inspectedAt: 'inspectedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QcInspectionScalarFieldEnum = (typeof QcInspectionScalarFieldEnum)[keyof typeof QcInspectionScalarFieldEnum]
+
+
+export const PreShippingSampleScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  status: 'status',
+  totalCargoUnits: 'totalCargoUnits',
+  sampleSize: 'sampleSize',
+  sampleUnits: 'sampleUnits',
+  sentAt: 'sentAt',
+  sentTo: 'sentTo',
+  customerApproval: 'customerApproval',
+  customerApprovedAt: 'customerApprovedAt',
+  customerApprovedBy: 'customerApprovedBy',
+  reworkInitiatedAt: 'reworkInitiatedAt',
+  reworkOrders: 'reworkOrders',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PreShippingSampleScalarFieldEnum = (typeof PreShippingSampleScalarFieldEnum)[keyof typeof PreShippingSampleScalarFieldEnum]
+
+
+export const DiscrepancyAlertScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  discrepancyType: 'discrepancyType',
+  description: 'description',
+  expectedQuantity: 'expectedQuantity',
+  actualQuantity: 'actualQuantity',
+  variance: 'variance',
+  flaggedAt: 'flaggedAt',
+  flaggedBy: 'flaggedBy',
+  severity: 'severity',
+  createdAt: 'createdAt'
+} as const
+
+export type DiscrepancyAlertScalarFieldEnum = (typeof DiscrepancyAlertScalarFieldEnum)[keyof typeof DiscrepancyAlertScalarFieldEnum]
+
+
+export const ClaimDisputeScalarFieldEnum = {
+  id: 'id',
+  orderTokenId: 'orderTokenId',
+  wetProcessingLogId: 'wetProcessingLogId',
+  reason: 'reason',
+  weightLossPercentage: 'weightLossPercentage',
+  expectedTolerance: 'expectedTolerance',
+  claimAmount: 'claimAmount',
+  claimStatus: 'claimStatus',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ClaimDisputeScalarFieldEnum = (typeof ClaimDisputeScalarFieldEnum)[keyof typeof ClaimDisputeScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -140,4 +447,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

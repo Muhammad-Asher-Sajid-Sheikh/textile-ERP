@@ -41,3 +41,161 @@ export const AuditActionType = {
 } as const
 
 export type AuditActionType = (typeof AuditActionType)[keyof typeof AuditActionType]
+
+
+export const OrderStatus = {
+  AUTHORIZED: 'AUTHORIZED',
+  MATERIAL_ALLOCATED: 'MATERIAL_ALLOCATED',
+  YARN_WEAVING_INPROGRESS: 'YARN_WEAVING_INPROGRESS',
+  WET_PROCESSING_INPROGRESS: 'WET_PROCESSING_INPROGRESS',
+  SURFACE_DECORATION_INPROGRESS: 'SURFACE_DECORATION_INPROGRESS',
+  ASSEMBLY_INPROGRESS: 'ASSEMBLY_INPROGRESS',
+  QC_VERIFICATION_INPROGRESS: 'QC_VERIFICATION_INPROGRESS',
+  PS_SAMPLE_PENDING: 'PS_SAMPLE_PENDING',
+  PS_APPROVED: 'PS_APPROVED',
+  EXPORT_READY: 'EXPORT_READY',
+  CANCELLED: 'CANCELLED',
+  FAILED: 'FAILED'
+} as const
+
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const RequisitionStatus = {
+  PENDING: 'PENDING',
+  RELEASED: 'RELEASED',
+  DISPATCHED: 'DISPATCHED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type RequisitionStatus = (typeof RequisitionStatus)[keyof typeof RequisitionStatus]
+
+
+export const YarnTwistingStatus = {
+  NOT_REQUIRED: 'NOT_REQUIRED',
+  PENDING: 'PENDING',
+  INPROGRESS: 'INPROGRESS',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type YarnTwistingStatus = (typeof YarnTwistingStatus)[keyof typeof YarnTwistingStatus]
+
+
+export const WeavingStatus = {
+  PENDING: 'PENDING',
+  INPROGRESS: 'INPROGRESS',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type WeavingStatus = (typeof WeavingStatus)[keyof typeof WeavingStatus]
+
+
+export const WetProcessingStatus = {
+  PENDING: 'PENDING',
+  INPROGRESS: 'INPROGRESS',
+  PASSED: 'PASSED',
+  FAILED: 'FAILED',
+  DISPUTED: 'DISPUTED'
+} as const
+
+export type WetProcessingStatus = (typeof WetProcessingStatus)[keyof typeof WetProcessingStatus]
+
+
+export const TestType = {
+  COLOR_FASTNESS: 'COLOR_FASTNESS',
+  SHRINKING: 'SHRINKING',
+  GASOLINE_SMELL: 'GASOLINE_SMELL'
+} as const
+
+export type TestType = (typeof TestType)[keyof typeof TestType]
+
+
+export const TestResult = {
+  PASSED: 'PASSED',
+  FAILED: 'FAILED',
+  PENDING: 'PENDING'
+} as const
+
+export type TestResult = (typeof TestResult)[keyof typeof TestResult]
+
+
+export const DecorationType = {
+  PRINTING: 'PRINTING',
+  EMBROIDERY: 'EMBROIDERY',
+  BOTH: 'BOTH',
+  NONE: 'NONE'
+} as const
+
+export type DecorationType = (typeof DecorationType)[keyof typeof DecorationType]
+
+
+export const DecorLogStatus = {
+  PENDING: 'PENDING',
+  INPROGRESS: 'INPROGRESS',
+  RETURNED: 'RETURNED',
+  DISCREPANCY_FLAGGED: 'DISCREPANCY_FLAGGED',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type DecorLogStatus = (typeof DecorLogStatus)[keyof typeof DecorLogStatus]
+
+
+export const AssemblyPhase = {
+  PHASE1_CUTTING: 'PHASE1_CUTTING',
+  PHASE2_STITCHING: 'PHASE2_STITCHING',
+  PHASE3_INITIAL_CHECK: 'PHASE3_INITIAL_CHECK',
+  PHASE4_FOLDING: 'PHASE4_FOLDING',
+  PHASE5_FINAL_CHECK: 'PHASE5_FINAL_CHECK',
+  PHASE6_PACKING: 'PHASE6_PACKING'
+} as const
+
+export type AssemblyPhase = (typeof AssemblyPhase)[keyof typeof AssemblyPhase]
+
+
+export const AssemblyPhaseStatus = {
+  PENDING: 'PENDING',
+  INPROGRESS: 'INPROGRESS',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type AssemblyPhaseStatus = (typeof AssemblyPhaseStatus)[keyof typeof AssemblyPhaseStatus]
+
+
+export const QcStatus = {
+  PENDING: 'PENDING',
+  PASSED: 'PASSED',
+  FAILED: 'FAILED',
+  VERIFIED: 'VERIFIED'
+} as const
+
+export type QcStatus = (typeof QcStatus)[keyof typeof QcStatus]
+
+
+export const AuditType = {
+  STRUCTURAL: 'STRUCTURAL',
+  AESTHETIC: 'AESTHETIC',
+  ASEPTIC: 'ASEPTIC'
+} as const
+
+export type AuditType = (typeof AuditType)[keyof typeof AuditType]
+
+
+export const PsSampleStatus = {
+  PENDING: 'PENDING',
+  SENT_TO_CUSTOMER: 'SENT_TO_CUSTOMER',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  REWORK_INITIATED: 'REWORK_INITIATED'
+} as const
+
+export type PsSampleStatus = (typeof PsSampleStatus)[keyof typeof PsSampleStatus]
+
+
+export const DiscrepancyType = {
+  PIECE_COUNT_MISMATCH: 'PIECE_COUNT_MISMATCH',
+  WEIGHT_VARIANCE: 'WEIGHT_VARIANCE',
+  DIMENSION_MISMATCH: 'DIMENSION_MISMATCH',
+  QUALITY_DEFECT: 'QUALITY_DEFECT'
+} as const
+
+export type DiscrepancyType = (typeof DiscrepancyType)[keyof typeof DiscrepancyType]

@@ -32,3 +32,83 @@ export type RefreshToken = Prisma.RefreshTokenModel
  * 
  */
 export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model OrderToken
+ * 
+ */
+export type OrderToken = Prisma.OrderTokenModel
+/**
+ * Model TechPack
+ * 
+ */
+export type TechPack = Prisma.TechPackModel
+/**
+ * Model WarehouseMaterialInventory
+ * 
+ */
+export type WarehouseMaterialInventory = Prisma.WarehouseMaterialInventoryModel
+/**
+ * Model ProductionRequisition
+ * 
+ */
+export type ProductionRequisition = Prisma.ProductionRequisitionModel
+/**
+ * Model MaterialDispatchLog
+ * 
+ */
+export type MaterialDispatchLog = Prisma.MaterialDispatchLogModel
+/**
+ * Model LoomOutputLog
+ * 
+ */
+export type LoomOutputLog = Prisma.LoomOutputLogModel
+/**
+ * Model WetProcessingLog
+ * 
+ */
+export type WetProcessingLog = Prisma.WetProcessingLogModel
+/**
+ * Model QualityTestLog
+ * 
+ */
+export type QualityTestLog = Prisma.QualityTestLogModel
+/**
+ * Model DecorPrintingLog
+ * 
+ */
+export type DecorPrintingLog = Prisma.DecorPrintingLogModel
+/**
+ * Model EmbroideryPieceLog
+ * 
+ */
+export type EmbroideryPieceLog = Prisma.EmbroideryPieceLogModel
+/**
+ * Model AssemblyJobCard
+ * 
+ */
+export type AssemblyJobCard = Prisma.AssemblyJobCardModel
+/**
+ * Model AssemblyPhaseLog
+ * 
+ */
+export type AssemblyPhaseLog = Prisma.AssemblyPhaseLogModel
+/**
+ * Model QcInspection
+ * 
+ */
+export type QcInspection = Prisma.QcInspectionModel
+/**
+ * Model PreShippingSample
+ * 
+ */
+export type PreShippingSample = Prisma.PreShippingSampleModel
+/**
+ * Model DiscrepancyAlert
+ * 
+ */
+export type DiscrepancyAlert = Prisma.DiscrepancyAlertModel
+/**
+ * Model ClaimDispute
+ * 
+ */
+export type ClaimDispute = Prisma.ClaimDisputeModel
