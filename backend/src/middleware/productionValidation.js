@@ -115,8 +115,8 @@ export const productionValidationSchemas = {
       .isIn(['COLOR_FASTNESS', 'SHRINKING', 'GASOLINE_SMELL'])
       .withMessage('testType must be one of: COLOR_FASTNESS, SHRINKING, GASOLINE_SMELL'),
     body('result')
-      .isBoolean()
-      .withMessage('result must be a boolean'),
+      .isIn(['PASSED', 'FAILED'])
+      .withMessage('result must be PASSED or FAILED'),
     body('testedBy')
       .isString()
       .withMessage('testedBy is required'),

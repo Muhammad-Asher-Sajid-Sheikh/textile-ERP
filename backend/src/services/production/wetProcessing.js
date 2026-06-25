@@ -153,6 +153,7 @@ export class WetProcessingService {
         returnedAt: request.returnedAt,
         returnedFrom: request.returnedFrom,
       },
+      include: { qualityTests: true },
     });
 
     let claimDispute = null;

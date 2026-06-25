@@ -454,7 +454,7 @@ Response:
 
 ### **Step 13: Pre-Shipping Sample Gate**
 ```bash
-POST /api/production/ps/sample/initiate
+POST /api/production/qc/ps-sample/initiate
 Content-Type: application/json
 Authorization: Bearer <token>
 
@@ -477,7 +477,7 @@ Response:
 }
 
 # Send to Customer
-POST /api/production/ps/sample/send-to-customer
+POST /api/production/qc/ps-sample/send
 {
   "psLogId": "ggg0e8400-e29b-41d4-a716-446655440bbb",
   "sentTo": "customer@retailchain.com",
