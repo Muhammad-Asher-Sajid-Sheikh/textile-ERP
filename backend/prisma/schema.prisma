@@ -231,29 +231,51 @@ model OrderToken {
 }
 
 model TechPack {
-  id                    String                @id @default(uuid())
-  orderTokenId          String                @unique
-  orderToken            OrderToken            @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
+  id                  String                @id @default(uuid())
+  // 1. Made nullable to allow safe unlinking when forking a new revision version
+  orderTokenId        String?               @unique
+  orderToken          OrderToken?           @relation(fields: [orderTokenId], references: [id], onDelete: Cascade)
   
-  // Specifications
-  yarnType              String
-  fabricType            String
-  gsm                   Decimal               @db.Decimal(10, 2)
-  totalYardage          Decimal               @db.Decimal(12, 2)
-  requiredYarnWeight    Decimal               @db.Decimal(12, 2) // in Kg
+  // 2. Added metadata for clear identification 
+  designName          String                @default("Provisional Template")// e.g., "3 PC Set Blue Grey Leaves Towel"
+  seasonCode          String?               // e.g., "SS-2026"
+  totalTargetQuantity Int                   @default(0)
   
-  // Feature flags
-  requiresYarnTwisting  Boolean               @default(false)
-  isPrintingRequired    Boolean               @default(false)
-  isEmbroideryRequired  Boolean               @default(false)
+  // 3. Operational State Fields for Version Control & Approvals
+  version             Int                   @default(1)
+  isLocked            Boolean               @default(false)
+
+  // --- Legacy Core Specifications (Maintained for backward compatibility or bulk tracking) ---
+  yarnType            String?
+  fabricType          String?
+  gsm                 Decimal?               @db.Decimal(10, 2)
+  totalYardage        Decimal?               @db.Decimal(12, 2)
+  requiredYarnWeight  Decimal?               @db.Decimal(12, 2) // in Kg
   
-  // Pre-authorized master samples
-  preApprovedSampleId   String?
+  // --- Legacy Feature Flags ---
+  requiresYarnTwisting Boolean               @default(false)
+  isPrintingRequired   Boolean               @default(false)
+  isEmbroideryRequired Boolean               @default(false)
   
-  createdAt             DateTime              @default(now())
-  updatedAt             DateTime              @updatedAt
+  // --- Legacy Pre-authorized master samples ---
+  preApprovedSampleId  String?
+
+  // 4. Normalized Reference Specification Links (Foreign Keys)
+  weavingSpecId       String?
+  weavingSpec         WeavingSpecification? @relation(fields: [weavingSpecId], references: [id], onDelete: SetNull)
   
+  dyeingSpecId        String?
+  dyeingSpec          DyeingSpecification?  @relation(fields: [dyeingSpecId], references: [id], onDelete: SetNull)
+
+  // 5. Decoupled Structural Item Sizing & Layout Components Relation array
+  components          TechPackComponent[]
+
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+
   @@index([orderTokenId])
+  @@index([weavingSpecId])
+  @@index([dyeingSpecId])
 }
 
 model WarehouseMaterialInventory {
@@ -631,4 +653,101 @@ model ClaimDispute {
   @@index([orderTokenId])
   @@index([claimStatus])
   @@unique([wetProcessingLogId]) // One claim per wet processing log
+}
+
+
+
+// MERCHANDISE DEPARTMENT
+
+// Global audit logging table used for freezing version histories
+model AuditLogs {
+  id            String   @id @default(uuid())
+  table         String   // Target schema name (e.g., "TechPack")
+  operation     String   // Operation identifier (e.g., "RELEASE_VERSION")
+  recordId      String   // Target document unique string reference
+  previousState String   @db.Text
+  newState      String   @db.Text
+  changedBy     String   // Signature of actor/department executing change
+  timestamp     DateTime @default(now())
+
+  @@index([table])
+  @@index([recordId])
+}
+
+// =========================================================================
+// 🧵 RECONFIGURED / EXHAUSTIVE FABRIC SPECIFICATION TABLES
+// =========================================================================
+
+model WeavingSpecification {
+  id             String     @id @default(uuid())
+  loomType       String     // e.g., "Airjet Loom", "Sulzer", "Rapier"
+  warpYarnCount  String     // e.g., "20/1 CD", "16/1 OE"
+  weftYarnCount  String     // e.g., "16/1 OE"
+  pileYarnCount  String?    // e.g., "20/2 CD" (Optional for Terry Towels)
+  picksPerInch   Int
+  endsPerInch    Int
+  terryRatio     Decimal?   @db.Decimal(6, 2) // e.g., 4.50 (Pile to Ground ratio)
+  technicalNotes String?    @db.Text
+  createdAt      DateTime   @default(now())
+  
+  // Backwards relational link
+  techPacks      TechPack[]
+}
+
+model DyeingSpecification {
+  id                 String     @id @default(uuid())
+  dyeType            String     // e.g., "Reactive Dyeing", "Vat Dyeing"
+  colorName          String     // e.g., "Blue Grey Leaves"
+  pantoneCode        String     // e.g., "19-4024 TCX"
+  chemicalRestraints String?    @db.Text // Reach norms, Azo-free instructions
+  targetShrinkagePct Decimal    @db.Decimal(5, 2) @default(0.00) // Target allowable shrinkage
+  createdAt          DateTime   @default(now())
+
+  // Backwards relational link
+  techPacks          TechPack[]
+}
+
+model PrintingSpecification {
+  id            String              @id @default(uuid())
+  printMethod   String              // e.g., "Rotary Screen", "Digital Pigment"
+  placementArea String              // e.g., "Border Left Corner", "Full Panel"
+  colorCount    Int                 @default(1)
+  createdAt     DateTime            @default(now())
+
+  // Backwards relational link
+  components    TechPackComponent[]
+}
+
+// =========================================================================
+// 🧮 DECOUPLED INDEPENDENT SETS / OVERRIDDEN SKUS
+// =========================================================================
+
+model TechPackComponent {
+  id                  String                @id @default(uuid())
+  techPackId          String
+  techPack            TechPack              @relation(fields: [techPackId], references: [id], onDelete: Cascade)
+  
+  componentName       String                // e.g., "Bath Towel", "Hand Towel", "Gloves"
+  
+  // Cutting Matrix Coordinates
+  cutLengthInches     Decimal               @db.Decimal(8, 2)
+  cutWidthInches      Decimal               @db.Decimal(8, 2)
+  
+  // Finished Output Specs
+  finishedLengthCms   Decimal               @db.Decimal(8, 2)
+  finishedWidthCms    Decimal               @db.Decimal(8, 2)
+  
+  targetGsm           Int
+  targetPieceWeightGm Decimal               @db.Decimal(8, 2) // Explicit weight matching Number mapping
+  stitchingType       String                // e.g., "Double Needle Hem", "Overlock"
+  borderStructure     String?               // e.g., "Fancy Dobby Border"
+  cartonPackingRatio  Int                   @default(12) // Minimum units packed per export carton
+  
+  // Optional unique surface override relation mapping 
+  printingSpecId      String?
+  printingSpec        PrintingSpecification? @relation(fields: [printingSpecId], references: [id], onDelete: SetNull)
+
+  createdAt           DateTime              @db.Timestamp(3) @default(now())
+
+  @@index([techPackId])
 }

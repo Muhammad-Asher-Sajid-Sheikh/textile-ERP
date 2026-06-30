@@ -402,7 +402,12 @@ export const ModelName = {
   QcInspection: 'QcInspection',
   PreShippingSample: 'PreShippingSample',
   DiscrepancyAlert: 'DiscrepancyAlert',
-  ClaimDispute: 'ClaimDispute'
+  ClaimDispute: 'ClaimDispute',
+  AuditLogs: 'AuditLogs',
+  WeavingSpecification: 'WeavingSpecification',
+  DyeingSpecification: 'DyeingSpecification',
+  PrintingSpecification: 'PrintingSpecification',
+  TechPackComponent: 'TechPackComponent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -418,7 +423,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "refreshToken" | "auditLog" | "orderToken" | "techPack" | "warehouseMaterialInventory" | "productionRequisition" | "materialDispatchLog" | "loomOutputLog" | "wetProcessingLog" | "qualityTestLog" | "decorPrintingLog" | "embroideryPieceLog" | "assemblyJobCard" | "assemblyPhaseLog" | "qcInspection" | "preShippingSample" | "discrepancyAlert" | "claimDispute"
+    modelProps: "user" | "refreshToken" | "auditLog" | "orderToken" | "techPack" | "warehouseMaterialInventory" | "productionRequisition" | "materialDispatchLog" | "loomOutputLog" | "wetProcessingLog" | "qualityTestLog" | "decorPrintingLog" | "embroideryPieceLog" | "assemblyJobCard" | "assemblyPhaseLog" | "qcInspection" | "preShippingSample" | "discrepancyAlert" | "claimDispute" | "auditLogs" | "weavingSpecification" | "dyeingSpecification" | "printingSpecification" | "techPackComponent"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1828,6 +1833,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AuditLogs: {
+      payload: Prisma.$AuditLogsPayload<ExtArgs>
+      fields: Prisma.AuditLogsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AuditLogsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AuditLogsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload>
+        }
+        findFirst: {
+          args: Prisma.AuditLogsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AuditLogsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload>
+        }
+        findMany: {
+          args: Prisma.AuditLogsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload>[]
+        }
+        create: {
+          args: Prisma.AuditLogsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload>
+        }
+        createMany: {
+          args: Prisma.AuditLogsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AuditLogsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload>[]
+        }
+        delete: {
+          args: Prisma.AuditLogsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload>
+        }
+        update: {
+          args: Prisma.AuditLogsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload>
+        }
+        deleteMany: {
+          args: Prisma.AuditLogsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AuditLogsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AuditLogsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload>[]
+        }
+        upsert: {
+          args: Prisma.AuditLogsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuditLogsPayload>
+        }
+        aggregate: {
+          args: Prisma.AuditLogsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAuditLogs>
+        }
+        groupBy: {
+          args: Prisma.AuditLogsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AuditLogsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AuditLogsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AuditLogsCountAggregateOutputType> | number
+        }
+      }
+    }
+    WeavingSpecification: {
+      payload: Prisma.$WeavingSpecificationPayload<ExtArgs>
+      fields: Prisma.WeavingSpecificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WeavingSpecificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WeavingSpecificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload>
+        }
+        findFirst: {
+          args: Prisma.WeavingSpecificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WeavingSpecificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload>
+        }
+        findMany: {
+          args: Prisma.WeavingSpecificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload>[]
+        }
+        create: {
+          args: Prisma.WeavingSpecificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload>
+        }
+        createMany: {
+          args: Prisma.WeavingSpecificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WeavingSpecificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload>[]
+        }
+        delete: {
+          args: Prisma.WeavingSpecificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload>
+        }
+        update: {
+          args: Prisma.WeavingSpecificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.WeavingSpecificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WeavingSpecificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WeavingSpecificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.WeavingSpecificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WeavingSpecificationPayload>
+        }
+        aggregate: {
+          args: Prisma.WeavingSpecificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWeavingSpecification>
+        }
+        groupBy: {
+          args: Prisma.WeavingSpecificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WeavingSpecificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WeavingSpecificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WeavingSpecificationCountAggregateOutputType> | number
+        }
+      }
+    }
+    DyeingSpecification: {
+      payload: Prisma.$DyeingSpecificationPayload<ExtArgs>
+      fields: Prisma.DyeingSpecificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DyeingSpecificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DyeingSpecificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload>
+        }
+        findFirst: {
+          args: Prisma.DyeingSpecificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DyeingSpecificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload>
+        }
+        findMany: {
+          args: Prisma.DyeingSpecificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload>[]
+        }
+        create: {
+          args: Prisma.DyeingSpecificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload>
+        }
+        createMany: {
+          args: Prisma.DyeingSpecificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DyeingSpecificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload>[]
+        }
+        delete: {
+          args: Prisma.DyeingSpecificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload>
+        }
+        update: {
+          args: Prisma.DyeingSpecificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.DyeingSpecificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DyeingSpecificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DyeingSpecificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.DyeingSpecificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DyeingSpecificationPayload>
+        }
+        aggregate: {
+          args: Prisma.DyeingSpecificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDyeingSpecification>
+        }
+        groupBy: {
+          args: Prisma.DyeingSpecificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DyeingSpecificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DyeingSpecificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DyeingSpecificationCountAggregateOutputType> | number
+        }
+      }
+    }
+    PrintingSpecification: {
+      payload: Prisma.$PrintingSpecificationPayload<ExtArgs>
+      fields: Prisma.PrintingSpecificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PrintingSpecificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PrintingSpecificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload>
+        }
+        findFirst: {
+          args: Prisma.PrintingSpecificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PrintingSpecificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload>
+        }
+        findMany: {
+          args: Prisma.PrintingSpecificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload>[]
+        }
+        create: {
+          args: Prisma.PrintingSpecificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload>
+        }
+        createMany: {
+          args: Prisma.PrintingSpecificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PrintingSpecificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload>[]
+        }
+        delete: {
+          args: Prisma.PrintingSpecificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload>
+        }
+        update: {
+          args: Prisma.PrintingSpecificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.PrintingSpecificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PrintingSpecificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PrintingSpecificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.PrintingSpecificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrintingSpecificationPayload>
+        }
+        aggregate: {
+          args: Prisma.PrintingSpecificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePrintingSpecification>
+        }
+        groupBy: {
+          args: Prisma.PrintingSpecificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PrintingSpecificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PrintingSpecificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PrintingSpecificationCountAggregateOutputType> | number
+        }
+      }
+    }
+    TechPackComponent: {
+      payload: Prisma.$TechPackComponentPayload<ExtArgs>
+      fields: Prisma.TechPackComponentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TechPackComponentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TechPackComponentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload>
+        }
+        findFirst: {
+          args: Prisma.TechPackComponentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TechPackComponentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload>
+        }
+        findMany: {
+          args: Prisma.TechPackComponentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload>[]
+        }
+        create: {
+          args: Prisma.TechPackComponentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload>
+        }
+        createMany: {
+          args: Prisma.TechPackComponentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TechPackComponentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload>[]
+        }
+        delete: {
+          args: Prisma.TechPackComponentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload>
+        }
+        update: {
+          args: Prisma.TechPackComponentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload>
+        }
+        deleteMany: {
+          args: Prisma.TechPackComponentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TechPackComponentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TechPackComponentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload>[]
+        }
+        upsert: {
+          args: Prisma.TechPackComponentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TechPackComponentPayload>
+        }
+        aggregate: {
+          args: Prisma.TechPackComponentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTechPackComponent>
+        }
+        groupBy: {
+          args: Prisma.TechPackComponentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TechPackComponentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TechPackComponentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TechPackComponentCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1929,6 +2304,11 @@ export type OrderTokenScalarFieldEnum = (typeof OrderTokenScalarFieldEnum)[keyof
 export const TechPackScalarFieldEnum = {
   id: 'id',
   orderTokenId: 'orderTokenId',
+  designName: 'designName',
+  seasonCode: 'seasonCode',
+  totalTargetQuantity: 'totalTargetQuantity',
+  version: 'version',
+  isLocked: 'isLocked',
   yarnType: 'yarnType',
   fabricType: 'fabricType',
   gsm: 'gsm',
@@ -1938,6 +2318,8 @@ export const TechPackScalarFieldEnum = {
   isPrintingRequired: 'isPrintingRequired',
   isEmbroideryRequired: 'isEmbroideryRequired',
   preApprovedSampleId: 'preApprovedSampleId',
+  weavingSpecId: 'weavingSpecId',
+  dyeingSpecId: 'dyeingSpecId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2194,6 +2576,80 @@ export const ClaimDisputeScalarFieldEnum = {
 } as const
 
 export type ClaimDisputeScalarFieldEnum = (typeof ClaimDisputeScalarFieldEnum)[keyof typeof ClaimDisputeScalarFieldEnum]
+
+
+export const AuditLogsScalarFieldEnum = {
+  id: 'id',
+  table: 'table',
+  operation: 'operation',
+  recordId: 'recordId',
+  previousState: 'previousState',
+  newState: 'newState',
+  changedBy: 'changedBy',
+  timestamp: 'timestamp'
+} as const
+
+export type AuditLogsScalarFieldEnum = (typeof AuditLogsScalarFieldEnum)[keyof typeof AuditLogsScalarFieldEnum]
+
+
+export const WeavingSpecificationScalarFieldEnum = {
+  id: 'id',
+  loomType: 'loomType',
+  warpYarnCount: 'warpYarnCount',
+  weftYarnCount: 'weftYarnCount',
+  pileYarnCount: 'pileYarnCount',
+  picksPerInch: 'picksPerInch',
+  endsPerInch: 'endsPerInch',
+  terryRatio: 'terryRatio',
+  technicalNotes: 'technicalNotes',
+  createdAt: 'createdAt'
+} as const
+
+export type WeavingSpecificationScalarFieldEnum = (typeof WeavingSpecificationScalarFieldEnum)[keyof typeof WeavingSpecificationScalarFieldEnum]
+
+
+export const DyeingSpecificationScalarFieldEnum = {
+  id: 'id',
+  dyeType: 'dyeType',
+  colorName: 'colorName',
+  pantoneCode: 'pantoneCode',
+  chemicalRestraints: 'chemicalRestraints',
+  targetShrinkagePct: 'targetShrinkagePct',
+  createdAt: 'createdAt'
+} as const
+
+export type DyeingSpecificationScalarFieldEnum = (typeof DyeingSpecificationScalarFieldEnum)[keyof typeof DyeingSpecificationScalarFieldEnum]
+
+
+export const PrintingSpecificationScalarFieldEnum = {
+  id: 'id',
+  printMethod: 'printMethod',
+  placementArea: 'placementArea',
+  colorCount: 'colorCount',
+  createdAt: 'createdAt'
+} as const
+
+export type PrintingSpecificationScalarFieldEnum = (typeof PrintingSpecificationScalarFieldEnum)[keyof typeof PrintingSpecificationScalarFieldEnum]
+
+
+export const TechPackComponentScalarFieldEnum = {
+  id: 'id',
+  techPackId: 'techPackId',
+  componentName: 'componentName',
+  cutLengthInches: 'cutLengthInches',
+  cutWidthInches: 'cutWidthInches',
+  finishedLengthCms: 'finishedLengthCms',
+  finishedWidthCms: 'finishedWidthCms',
+  targetGsm: 'targetGsm',
+  targetPieceWeightGm: 'targetPieceWeightGm',
+  stitchingType: 'stitchingType',
+  borderStructure: 'borderStructure',
+  cartonPackingRatio: 'cartonPackingRatio',
+  printingSpecId: 'printingSpecId',
+  createdAt: 'createdAt'
+} as const
+
+export type TechPackComponentScalarFieldEnum = (typeof TechPackComponentScalarFieldEnum)[keyof typeof TechPackComponentScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2686,6 +3142,11 @@ export type GlobalOmitConfig = {
   preShippingSample?: Prisma.PreShippingSampleOmit
   discrepancyAlert?: Prisma.DiscrepancyAlertOmit
   claimDispute?: Prisma.ClaimDisputeOmit
+  auditLogs?: Prisma.AuditLogsOmit
+  weavingSpecification?: Prisma.WeavingSpecificationOmit
+  dyeingSpecification?: Prisma.DyeingSpecificationOmit
+  printingSpecification?: Prisma.PrintingSpecificationOmit
+  techPackComponent?: Prisma.TechPackComponentOmit
 }
 
 /* Types for Logging */

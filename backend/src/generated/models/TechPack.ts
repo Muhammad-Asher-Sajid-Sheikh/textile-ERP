@@ -27,12 +27,16 @@ export type AggregateTechPack = {
 }
 
 export type TechPackAvgAggregateOutputType = {
+  totalTargetQuantity: number | null
+  version: number | null
   gsm: runtime.Decimal | null
   totalYardage: runtime.Decimal | null
   requiredYarnWeight: runtime.Decimal | null
 }
 
 export type TechPackSumAggregateOutputType = {
+  totalTargetQuantity: number | null
+  version: number | null
   gsm: runtime.Decimal | null
   totalYardage: runtime.Decimal | null
   requiredYarnWeight: runtime.Decimal | null
@@ -41,6 +45,11 @@ export type TechPackSumAggregateOutputType = {
 export type TechPackMinAggregateOutputType = {
   id: string | null
   orderTokenId: string | null
+  designName: string | null
+  seasonCode: string | null
+  totalTargetQuantity: number | null
+  version: number | null
+  isLocked: boolean | null
   yarnType: string | null
   fabricType: string | null
   gsm: runtime.Decimal | null
@@ -50,6 +59,8 @@ export type TechPackMinAggregateOutputType = {
   isPrintingRequired: boolean | null
   isEmbroideryRequired: boolean | null
   preApprovedSampleId: string | null
+  weavingSpecId: string | null
+  dyeingSpecId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -57,6 +68,11 @@ export type TechPackMinAggregateOutputType = {
 export type TechPackMaxAggregateOutputType = {
   id: string | null
   orderTokenId: string | null
+  designName: string | null
+  seasonCode: string | null
+  totalTargetQuantity: number | null
+  version: number | null
+  isLocked: boolean | null
   yarnType: string | null
   fabricType: string | null
   gsm: runtime.Decimal | null
@@ -66,6 +82,8 @@ export type TechPackMaxAggregateOutputType = {
   isPrintingRequired: boolean | null
   isEmbroideryRequired: boolean | null
   preApprovedSampleId: string | null
+  weavingSpecId: string | null
+  dyeingSpecId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -73,6 +91,11 @@ export type TechPackMaxAggregateOutputType = {
 export type TechPackCountAggregateOutputType = {
   id: number
   orderTokenId: number
+  designName: number
+  seasonCode: number
+  totalTargetQuantity: number
+  version: number
+  isLocked: number
   yarnType: number
   fabricType: number
   gsm: number
@@ -82,6 +105,8 @@ export type TechPackCountAggregateOutputType = {
   isPrintingRequired: number
   isEmbroideryRequired: number
   preApprovedSampleId: number
+  weavingSpecId: number
+  dyeingSpecId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -89,12 +114,16 @@ export type TechPackCountAggregateOutputType = {
 
 
 export type TechPackAvgAggregateInputType = {
+  totalTargetQuantity?: true
+  version?: true
   gsm?: true
   totalYardage?: true
   requiredYarnWeight?: true
 }
 
 export type TechPackSumAggregateInputType = {
+  totalTargetQuantity?: true
+  version?: true
   gsm?: true
   totalYardage?: true
   requiredYarnWeight?: true
@@ -103,6 +132,11 @@ export type TechPackSumAggregateInputType = {
 export type TechPackMinAggregateInputType = {
   id?: true
   orderTokenId?: true
+  designName?: true
+  seasonCode?: true
+  totalTargetQuantity?: true
+  version?: true
+  isLocked?: true
   yarnType?: true
   fabricType?: true
   gsm?: true
@@ -112,6 +146,8 @@ export type TechPackMinAggregateInputType = {
   isPrintingRequired?: true
   isEmbroideryRequired?: true
   preApprovedSampleId?: true
+  weavingSpecId?: true
+  dyeingSpecId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -119,6 +155,11 @@ export type TechPackMinAggregateInputType = {
 export type TechPackMaxAggregateInputType = {
   id?: true
   orderTokenId?: true
+  designName?: true
+  seasonCode?: true
+  totalTargetQuantity?: true
+  version?: true
+  isLocked?: true
   yarnType?: true
   fabricType?: true
   gsm?: true
@@ -128,6 +169,8 @@ export type TechPackMaxAggregateInputType = {
   isPrintingRequired?: true
   isEmbroideryRequired?: true
   preApprovedSampleId?: true
+  weavingSpecId?: true
+  dyeingSpecId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -135,6 +178,11 @@ export type TechPackMaxAggregateInputType = {
 export type TechPackCountAggregateInputType = {
   id?: true
   orderTokenId?: true
+  designName?: true
+  seasonCode?: true
+  totalTargetQuantity?: true
+  version?: true
+  isLocked?: true
   yarnType?: true
   fabricType?: true
   gsm?: true
@@ -144,6 +192,8 @@ export type TechPackCountAggregateInputType = {
   isPrintingRequired?: true
   isEmbroideryRequired?: true
   preApprovedSampleId?: true
+  weavingSpecId?: true
+  dyeingSpecId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -237,16 +287,23 @@ export type TechPackGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type TechPackGroupByOutputType = {
   id: string
-  orderTokenId: string
-  yarnType: string
-  fabricType: string
-  gsm: runtime.Decimal
-  totalYardage: runtime.Decimal
-  requiredYarnWeight: runtime.Decimal
+  orderTokenId: string | null
+  designName: string
+  seasonCode: string | null
+  totalTargetQuantity: number
+  version: number
+  isLocked: boolean
+  yarnType: string | null
+  fabricType: string | null
+  gsm: runtime.Decimal | null
+  totalYardage: runtime.Decimal | null
+  requiredYarnWeight: runtime.Decimal | null
   requiresYarnTwisting: boolean
   isPrintingRequired: boolean
   isEmbroideryRequired: boolean
   preApprovedSampleId: string | null
+  weavingSpecId: string | null
+  dyeingSpecId: string | null
   createdAt: Date
   updatedAt: Date
   _count: TechPackCountAggregateOutputType | null
@@ -276,36 +333,56 @@ export type TechPackWhereInput = {
   OR?: Prisma.TechPackWhereInput[]
   NOT?: Prisma.TechPackWhereInput | Prisma.TechPackWhereInput[]
   id?: Prisma.StringFilter<"TechPack"> | string
-  orderTokenId?: Prisma.StringFilter<"TechPack"> | string
-  yarnType?: Prisma.StringFilter<"TechPack"> | string
-  fabricType?: Prisma.StringFilter<"TechPack"> | string
-  gsm?: Prisma.DecimalFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage?: Prisma.DecimalFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight?: Prisma.DecimalFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  orderTokenId?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  designName?: Prisma.StringFilter<"TechPack"> | string
+  seasonCode?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  totalTargetQuantity?: Prisma.IntFilter<"TechPack"> | number
+  version?: Prisma.IntFilter<"TechPack"> | number
+  isLocked?: Prisma.BoolFilter<"TechPack"> | boolean
+  yarnType?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  fabricType?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  gsm?: Prisma.DecimalNullableFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.DecimalNullableFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.DecimalNullableFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: Prisma.BoolFilter<"TechPack"> | boolean
   isPrintingRequired?: Prisma.BoolFilter<"TechPack"> | boolean
   isEmbroideryRequired?: Prisma.BoolFilter<"TechPack"> | boolean
   preApprovedSampleId?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  weavingSpecId?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  dyeingSpecId?: Prisma.StringNullableFilter<"TechPack"> | string | null
   createdAt?: Prisma.DateTimeFilter<"TechPack"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TechPack"> | Date | string
-  orderToken?: Prisma.XOR<Prisma.OrderTokenScalarRelationFilter, Prisma.OrderTokenWhereInput>
+  orderToken?: Prisma.XOR<Prisma.OrderTokenNullableScalarRelationFilter, Prisma.OrderTokenWhereInput> | null
+  weavingSpec?: Prisma.XOR<Prisma.WeavingSpecificationNullableScalarRelationFilter, Prisma.WeavingSpecificationWhereInput> | null
+  dyeingSpec?: Prisma.XOR<Prisma.DyeingSpecificationNullableScalarRelationFilter, Prisma.DyeingSpecificationWhereInput> | null
+  components?: Prisma.TechPackComponentListRelationFilter
 }
 
 export type TechPackOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  orderTokenId?: Prisma.SortOrder
-  yarnType?: Prisma.SortOrder
-  fabricType?: Prisma.SortOrder
-  gsm?: Prisma.SortOrder
-  totalYardage?: Prisma.SortOrder
-  requiredYarnWeight?: Prisma.SortOrder
+  orderTokenId?: Prisma.SortOrderInput | Prisma.SortOrder
+  designName?: Prisma.SortOrder
+  seasonCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalTargetQuantity?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  isLocked?: Prisma.SortOrder
+  yarnType?: Prisma.SortOrderInput | Prisma.SortOrder
+  fabricType?: Prisma.SortOrderInput | Prisma.SortOrder
+  gsm?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalYardage?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiredYarnWeight?: Prisma.SortOrderInput | Prisma.SortOrder
   requiresYarnTwisting?: Prisma.SortOrder
   isPrintingRequired?: Prisma.SortOrder
   isEmbroideryRequired?: Prisma.SortOrder
   preApprovedSampleId?: Prisma.SortOrderInput | Prisma.SortOrder
+  weavingSpecId?: Prisma.SortOrderInput | Prisma.SortOrder
+  dyeingSpecId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   orderToken?: Prisma.OrderTokenOrderByWithRelationInput
+  weavingSpec?: Prisma.WeavingSpecificationOrderByWithRelationInput
+  dyeingSpec?: Prisma.DyeingSpecificationOrderByWithRelationInput
+  components?: Prisma.TechPackComponentOrderByRelationAggregateInput
 }
 
 export type TechPackWhereUniqueInput = Prisma.AtLeast<{
@@ -314,32 +391,49 @@ export type TechPackWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TechPackWhereInput | Prisma.TechPackWhereInput[]
   OR?: Prisma.TechPackWhereInput[]
   NOT?: Prisma.TechPackWhereInput | Prisma.TechPackWhereInput[]
-  yarnType?: Prisma.StringFilter<"TechPack"> | string
-  fabricType?: Prisma.StringFilter<"TechPack"> | string
-  gsm?: Prisma.DecimalFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage?: Prisma.DecimalFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight?: Prisma.DecimalFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  designName?: Prisma.StringFilter<"TechPack"> | string
+  seasonCode?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  totalTargetQuantity?: Prisma.IntFilter<"TechPack"> | number
+  version?: Prisma.IntFilter<"TechPack"> | number
+  isLocked?: Prisma.BoolFilter<"TechPack"> | boolean
+  yarnType?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  fabricType?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  gsm?: Prisma.DecimalNullableFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.DecimalNullableFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.DecimalNullableFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: Prisma.BoolFilter<"TechPack"> | boolean
   isPrintingRequired?: Prisma.BoolFilter<"TechPack"> | boolean
   isEmbroideryRequired?: Prisma.BoolFilter<"TechPack"> | boolean
   preApprovedSampleId?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  weavingSpecId?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  dyeingSpecId?: Prisma.StringNullableFilter<"TechPack"> | string | null
   createdAt?: Prisma.DateTimeFilter<"TechPack"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TechPack"> | Date | string
-  orderToken?: Prisma.XOR<Prisma.OrderTokenScalarRelationFilter, Prisma.OrderTokenWhereInput>
+  orderToken?: Prisma.XOR<Prisma.OrderTokenNullableScalarRelationFilter, Prisma.OrderTokenWhereInput> | null
+  weavingSpec?: Prisma.XOR<Prisma.WeavingSpecificationNullableScalarRelationFilter, Prisma.WeavingSpecificationWhereInput> | null
+  dyeingSpec?: Prisma.XOR<Prisma.DyeingSpecificationNullableScalarRelationFilter, Prisma.DyeingSpecificationWhereInput> | null
+  components?: Prisma.TechPackComponentListRelationFilter
 }, "id" | "orderTokenId">
 
 export type TechPackOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  orderTokenId?: Prisma.SortOrder
-  yarnType?: Prisma.SortOrder
-  fabricType?: Prisma.SortOrder
-  gsm?: Prisma.SortOrder
-  totalYardage?: Prisma.SortOrder
-  requiredYarnWeight?: Prisma.SortOrder
+  orderTokenId?: Prisma.SortOrderInput | Prisma.SortOrder
+  designName?: Prisma.SortOrder
+  seasonCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalTargetQuantity?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  isLocked?: Prisma.SortOrder
+  yarnType?: Prisma.SortOrderInput | Prisma.SortOrder
+  fabricType?: Prisma.SortOrderInput | Prisma.SortOrder
+  gsm?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalYardage?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiredYarnWeight?: Prisma.SortOrderInput | Prisma.SortOrder
   requiresYarnTwisting?: Prisma.SortOrder
   isPrintingRequired?: Prisma.SortOrder
   isEmbroideryRequired?: Prisma.SortOrder
   preApprovedSampleId?: Prisma.SortOrderInput | Prisma.SortOrder
+  weavingSpecId?: Prisma.SortOrderInput | Prisma.SortOrder
+  dyeingSpecId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.TechPackCountOrderByAggregateInput
@@ -354,107 +448,158 @@ export type TechPackScalarWhereWithAggregatesInput = {
   OR?: Prisma.TechPackScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TechPackScalarWhereWithAggregatesInput | Prisma.TechPackScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"TechPack"> | string
-  orderTokenId?: Prisma.StringWithAggregatesFilter<"TechPack"> | string
-  yarnType?: Prisma.StringWithAggregatesFilter<"TechPack"> | string
-  fabricType?: Prisma.StringWithAggregatesFilter<"TechPack"> | string
-  gsm?: Prisma.DecimalWithAggregatesFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage?: Prisma.DecimalWithAggregatesFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight?: Prisma.DecimalWithAggregatesFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  orderTokenId?: Prisma.StringNullableWithAggregatesFilter<"TechPack"> | string | null
+  designName?: Prisma.StringWithAggregatesFilter<"TechPack"> | string
+  seasonCode?: Prisma.StringNullableWithAggregatesFilter<"TechPack"> | string | null
+  totalTargetQuantity?: Prisma.IntWithAggregatesFilter<"TechPack"> | number
+  version?: Prisma.IntWithAggregatesFilter<"TechPack"> | number
+  isLocked?: Prisma.BoolWithAggregatesFilter<"TechPack"> | boolean
+  yarnType?: Prisma.StringNullableWithAggregatesFilter<"TechPack"> | string | null
+  fabricType?: Prisma.StringNullableWithAggregatesFilter<"TechPack"> | string | null
+  gsm?: Prisma.DecimalNullableWithAggregatesFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.DecimalNullableWithAggregatesFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.DecimalNullableWithAggregatesFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: Prisma.BoolWithAggregatesFilter<"TechPack"> | boolean
   isPrintingRequired?: Prisma.BoolWithAggregatesFilter<"TechPack"> | boolean
   isEmbroideryRequired?: Prisma.BoolWithAggregatesFilter<"TechPack"> | boolean
   preApprovedSampleId?: Prisma.StringNullableWithAggregatesFilter<"TechPack"> | string | null
+  weavingSpecId?: Prisma.StringNullableWithAggregatesFilter<"TechPack"> | string | null
+  dyeingSpecId?: Prisma.StringNullableWithAggregatesFilter<"TechPack"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"TechPack"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"TechPack"> | Date | string
 }
 
 export type TechPackCreateInput = {
   id?: string
-  yarnType: string
-  fabricType: string
-  gsm: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage: runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight: runtime.Decimal | runtime.DecimalJsLike | number | string
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: boolean
   isPrintingRequired?: boolean
   isEmbroideryRequired?: boolean
   preApprovedSampleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  orderToken: Prisma.OrderTokenCreateNestedOneWithoutTechPackInput
+  orderToken?: Prisma.OrderTokenCreateNestedOneWithoutTechPackInput
+  weavingSpec?: Prisma.WeavingSpecificationCreateNestedOneWithoutTechPacksInput
+  dyeingSpec?: Prisma.DyeingSpecificationCreateNestedOneWithoutTechPacksInput
+  components?: Prisma.TechPackComponentCreateNestedManyWithoutTechPackInput
 }
 
 export type TechPackUncheckedCreateInput = {
   id?: string
-  orderTokenId: string
-  yarnType: string
-  fabricType: string
-  gsm: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage: runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight: runtime.Decimal | runtime.DecimalJsLike | number | string
+  orderTokenId?: string | null
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: boolean
   isPrintingRequired?: boolean
   isEmbroideryRequired?: boolean
   preApprovedSampleId?: string | null
+  weavingSpecId?: string | null
+  dyeingSpecId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  components?: Prisma.TechPackComponentUncheckedCreateNestedManyWithoutTechPackInput
 }
 
 export type TechPackUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  yarnType?: Prisma.StringFieldUpdateOperationsInput | string
-  fabricType?: Prisma.StringFieldUpdateOperationsInput | string
-  gsm?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  orderToken?: Prisma.OrderTokenUpdateOneRequiredWithoutTechPackNestedInput
+  orderToken?: Prisma.OrderTokenUpdateOneWithoutTechPackNestedInput
+  weavingSpec?: Prisma.WeavingSpecificationUpdateOneWithoutTechPacksNestedInput
+  dyeingSpec?: Prisma.DyeingSpecificationUpdateOneWithoutTechPacksNestedInput
+  components?: Prisma.TechPackComponentUpdateManyWithoutTechPackNestedInput
 }
 
 export type TechPackUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  orderTokenId?: Prisma.StringFieldUpdateOperationsInput | string
-  yarnType?: Prisma.StringFieldUpdateOperationsInput | string
-  fabricType?: Prisma.StringFieldUpdateOperationsInput | string
-  gsm?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  orderTokenId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weavingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dyeingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  components?: Prisma.TechPackComponentUncheckedUpdateManyWithoutTechPackNestedInput
 }
 
 export type TechPackCreateManyInput = {
   id?: string
-  orderTokenId: string
-  yarnType: string
-  fabricType: string
-  gsm: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage: runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight: runtime.Decimal | runtime.DecimalJsLike | number | string
+  orderTokenId?: string | null
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: boolean
   isPrintingRequired?: boolean
   isEmbroideryRequired?: boolean
   preApprovedSampleId?: string | null
+  weavingSpecId?: string | null
+  dyeingSpecId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type TechPackUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  yarnType?: Prisma.StringFieldUpdateOperationsInput | string
-  fabricType?: Prisma.StringFieldUpdateOperationsInput | string
-  gsm?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -465,16 +610,23 @@ export type TechPackUpdateManyMutationInput = {
 
 export type TechPackUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  orderTokenId?: Prisma.StringFieldUpdateOperationsInput | string
-  yarnType?: Prisma.StringFieldUpdateOperationsInput | string
-  fabricType?: Prisma.StringFieldUpdateOperationsInput | string
-  gsm?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  orderTokenId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weavingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dyeingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -487,6 +639,11 @@ export type TechPackNullableScalarRelationFilter = {
 export type TechPackCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   orderTokenId?: Prisma.SortOrder
+  designName?: Prisma.SortOrder
+  seasonCode?: Prisma.SortOrder
+  totalTargetQuantity?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  isLocked?: Prisma.SortOrder
   yarnType?: Prisma.SortOrder
   fabricType?: Prisma.SortOrder
   gsm?: Prisma.SortOrder
@@ -496,11 +653,15 @@ export type TechPackCountOrderByAggregateInput = {
   isPrintingRequired?: Prisma.SortOrder
   isEmbroideryRequired?: Prisma.SortOrder
   preApprovedSampleId?: Prisma.SortOrder
+  weavingSpecId?: Prisma.SortOrder
+  dyeingSpecId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type TechPackAvgOrderByAggregateInput = {
+  totalTargetQuantity?: Prisma.SortOrder
+  version?: Prisma.SortOrder
   gsm?: Prisma.SortOrder
   totalYardage?: Prisma.SortOrder
   requiredYarnWeight?: Prisma.SortOrder
@@ -509,6 +670,11 @@ export type TechPackAvgOrderByAggregateInput = {
 export type TechPackMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   orderTokenId?: Prisma.SortOrder
+  designName?: Prisma.SortOrder
+  seasonCode?: Prisma.SortOrder
+  totalTargetQuantity?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  isLocked?: Prisma.SortOrder
   yarnType?: Prisma.SortOrder
   fabricType?: Prisma.SortOrder
   gsm?: Prisma.SortOrder
@@ -518,6 +684,8 @@ export type TechPackMaxOrderByAggregateInput = {
   isPrintingRequired?: Prisma.SortOrder
   isEmbroideryRequired?: Prisma.SortOrder
   preApprovedSampleId?: Prisma.SortOrder
+  weavingSpecId?: Prisma.SortOrder
+  dyeingSpecId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -525,6 +693,11 @@ export type TechPackMaxOrderByAggregateInput = {
 export type TechPackMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   orderTokenId?: Prisma.SortOrder
+  designName?: Prisma.SortOrder
+  seasonCode?: Prisma.SortOrder
+  totalTargetQuantity?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  isLocked?: Prisma.SortOrder
   yarnType?: Prisma.SortOrder
   fabricType?: Prisma.SortOrder
   gsm?: Prisma.SortOrder
@@ -534,14 +707,33 @@ export type TechPackMinOrderByAggregateInput = {
   isPrintingRequired?: Prisma.SortOrder
   isEmbroideryRequired?: Prisma.SortOrder
   preApprovedSampleId?: Prisma.SortOrder
+  weavingSpecId?: Prisma.SortOrder
+  dyeingSpecId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type TechPackSumOrderByAggregateInput = {
+  totalTargetQuantity?: Prisma.SortOrder
+  version?: Prisma.SortOrder
   gsm?: Prisma.SortOrder
   totalYardage?: Prisma.SortOrder
   requiredYarnWeight?: Prisma.SortOrder
+}
+
+export type TechPackListRelationFilter = {
+  every?: Prisma.TechPackWhereInput
+  some?: Prisma.TechPackWhereInput
+  none?: Prisma.TechPackWhereInput
+}
+
+export type TechPackOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type TechPackScalarRelationFilter = {
+  is?: Prisma.TechPackWhereInput
+  isNot?: Prisma.TechPackWhereInput
 }
 
 export type TechPackCreateNestedOneWithoutOrderTokenInput = {
@@ -576,42 +768,156 @@ export type TechPackUncheckedUpdateOneWithoutOrderTokenNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TechPackUpdateToOneWithWhereWithoutOrderTokenInput, Prisma.TechPackUpdateWithoutOrderTokenInput>, Prisma.TechPackUncheckedUpdateWithoutOrderTokenInput>
 }
 
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
   decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
   multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type TechPackCreateNestedManyWithoutWeavingSpecInput = {
+  create?: Prisma.XOR<Prisma.TechPackCreateWithoutWeavingSpecInput, Prisma.TechPackUncheckedCreateWithoutWeavingSpecInput> | Prisma.TechPackCreateWithoutWeavingSpecInput[] | Prisma.TechPackUncheckedCreateWithoutWeavingSpecInput[]
+  connectOrCreate?: Prisma.TechPackCreateOrConnectWithoutWeavingSpecInput | Prisma.TechPackCreateOrConnectWithoutWeavingSpecInput[]
+  createMany?: Prisma.TechPackCreateManyWeavingSpecInputEnvelope
+  connect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+}
+
+export type TechPackUncheckedCreateNestedManyWithoutWeavingSpecInput = {
+  create?: Prisma.XOR<Prisma.TechPackCreateWithoutWeavingSpecInput, Prisma.TechPackUncheckedCreateWithoutWeavingSpecInput> | Prisma.TechPackCreateWithoutWeavingSpecInput[] | Prisma.TechPackUncheckedCreateWithoutWeavingSpecInput[]
+  connectOrCreate?: Prisma.TechPackCreateOrConnectWithoutWeavingSpecInput | Prisma.TechPackCreateOrConnectWithoutWeavingSpecInput[]
+  createMany?: Prisma.TechPackCreateManyWeavingSpecInputEnvelope
+  connect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+}
+
+export type TechPackUpdateManyWithoutWeavingSpecNestedInput = {
+  create?: Prisma.XOR<Prisma.TechPackCreateWithoutWeavingSpecInput, Prisma.TechPackUncheckedCreateWithoutWeavingSpecInput> | Prisma.TechPackCreateWithoutWeavingSpecInput[] | Prisma.TechPackUncheckedCreateWithoutWeavingSpecInput[]
+  connectOrCreate?: Prisma.TechPackCreateOrConnectWithoutWeavingSpecInput | Prisma.TechPackCreateOrConnectWithoutWeavingSpecInput[]
+  upsert?: Prisma.TechPackUpsertWithWhereUniqueWithoutWeavingSpecInput | Prisma.TechPackUpsertWithWhereUniqueWithoutWeavingSpecInput[]
+  createMany?: Prisma.TechPackCreateManyWeavingSpecInputEnvelope
+  set?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  disconnect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  delete?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  connect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  update?: Prisma.TechPackUpdateWithWhereUniqueWithoutWeavingSpecInput | Prisma.TechPackUpdateWithWhereUniqueWithoutWeavingSpecInput[]
+  updateMany?: Prisma.TechPackUpdateManyWithWhereWithoutWeavingSpecInput | Prisma.TechPackUpdateManyWithWhereWithoutWeavingSpecInput[]
+  deleteMany?: Prisma.TechPackScalarWhereInput | Prisma.TechPackScalarWhereInput[]
+}
+
+export type TechPackUncheckedUpdateManyWithoutWeavingSpecNestedInput = {
+  create?: Prisma.XOR<Prisma.TechPackCreateWithoutWeavingSpecInput, Prisma.TechPackUncheckedCreateWithoutWeavingSpecInput> | Prisma.TechPackCreateWithoutWeavingSpecInput[] | Prisma.TechPackUncheckedCreateWithoutWeavingSpecInput[]
+  connectOrCreate?: Prisma.TechPackCreateOrConnectWithoutWeavingSpecInput | Prisma.TechPackCreateOrConnectWithoutWeavingSpecInput[]
+  upsert?: Prisma.TechPackUpsertWithWhereUniqueWithoutWeavingSpecInput | Prisma.TechPackUpsertWithWhereUniqueWithoutWeavingSpecInput[]
+  createMany?: Prisma.TechPackCreateManyWeavingSpecInputEnvelope
+  set?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  disconnect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  delete?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  connect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  update?: Prisma.TechPackUpdateWithWhereUniqueWithoutWeavingSpecInput | Prisma.TechPackUpdateWithWhereUniqueWithoutWeavingSpecInput[]
+  updateMany?: Prisma.TechPackUpdateManyWithWhereWithoutWeavingSpecInput | Prisma.TechPackUpdateManyWithWhereWithoutWeavingSpecInput[]
+  deleteMany?: Prisma.TechPackScalarWhereInput | Prisma.TechPackScalarWhereInput[]
+}
+
+export type TechPackCreateNestedManyWithoutDyeingSpecInput = {
+  create?: Prisma.XOR<Prisma.TechPackCreateWithoutDyeingSpecInput, Prisma.TechPackUncheckedCreateWithoutDyeingSpecInput> | Prisma.TechPackCreateWithoutDyeingSpecInput[] | Prisma.TechPackUncheckedCreateWithoutDyeingSpecInput[]
+  connectOrCreate?: Prisma.TechPackCreateOrConnectWithoutDyeingSpecInput | Prisma.TechPackCreateOrConnectWithoutDyeingSpecInput[]
+  createMany?: Prisma.TechPackCreateManyDyeingSpecInputEnvelope
+  connect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+}
+
+export type TechPackUncheckedCreateNestedManyWithoutDyeingSpecInput = {
+  create?: Prisma.XOR<Prisma.TechPackCreateWithoutDyeingSpecInput, Prisma.TechPackUncheckedCreateWithoutDyeingSpecInput> | Prisma.TechPackCreateWithoutDyeingSpecInput[] | Prisma.TechPackUncheckedCreateWithoutDyeingSpecInput[]
+  connectOrCreate?: Prisma.TechPackCreateOrConnectWithoutDyeingSpecInput | Prisma.TechPackCreateOrConnectWithoutDyeingSpecInput[]
+  createMany?: Prisma.TechPackCreateManyDyeingSpecInputEnvelope
+  connect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+}
+
+export type TechPackUpdateManyWithoutDyeingSpecNestedInput = {
+  create?: Prisma.XOR<Prisma.TechPackCreateWithoutDyeingSpecInput, Prisma.TechPackUncheckedCreateWithoutDyeingSpecInput> | Prisma.TechPackCreateWithoutDyeingSpecInput[] | Prisma.TechPackUncheckedCreateWithoutDyeingSpecInput[]
+  connectOrCreate?: Prisma.TechPackCreateOrConnectWithoutDyeingSpecInput | Prisma.TechPackCreateOrConnectWithoutDyeingSpecInput[]
+  upsert?: Prisma.TechPackUpsertWithWhereUniqueWithoutDyeingSpecInput | Prisma.TechPackUpsertWithWhereUniqueWithoutDyeingSpecInput[]
+  createMany?: Prisma.TechPackCreateManyDyeingSpecInputEnvelope
+  set?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  disconnect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  delete?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  connect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  update?: Prisma.TechPackUpdateWithWhereUniqueWithoutDyeingSpecInput | Prisma.TechPackUpdateWithWhereUniqueWithoutDyeingSpecInput[]
+  updateMany?: Prisma.TechPackUpdateManyWithWhereWithoutDyeingSpecInput | Prisma.TechPackUpdateManyWithWhereWithoutDyeingSpecInput[]
+  deleteMany?: Prisma.TechPackScalarWhereInput | Prisma.TechPackScalarWhereInput[]
+}
+
+export type TechPackUncheckedUpdateManyWithoutDyeingSpecNestedInput = {
+  create?: Prisma.XOR<Prisma.TechPackCreateWithoutDyeingSpecInput, Prisma.TechPackUncheckedCreateWithoutDyeingSpecInput> | Prisma.TechPackCreateWithoutDyeingSpecInput[] | Prisma.TechPackUncheckedCreateWithoutDyeingSpecInput[]
+  connectOrCreate?: Prisma.TechPackCreateOrConnectWithoutDyeingSpecInput | Prisma.TechPackCreateOrConnectWithoutDyeingSpecInput[]
+  upsert?: Prisma.TechPackUpsertWithWhereUniqueWithoutDyeingSpecInput | Prisma.TechPackUpsertWithWhereUniqueWithoutDyeingSpecInput[]
+  createMany?: Prisma.TechPackCreateManyDyeingSpecInputEnvelope
+  set?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  disconnect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  delete?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  connect?: Prisma.TechPackWhereUniqueInput | Prisma.TechPackWhereUniqueInput[]
+  update?: Prisma.TechPackUpdateWithWhereUniqueWithoutDyeingSpecInput | Prisma.TechPackUpdateWithWhereUniqueWithoutDyeingSpecInput[]
+  updateMany?: Prisma.TechPackUpdateManyWithWhereWithoutDyeingSpecInput | Prisma.TechPackUpdateManyWithWhereWithoutDyeingSpecInput[]
+  deleteMany?: Prisma.TechPackScalarWhereInput | Prisma.TechPackScalarWhereInput[]
+}
+
+export type TechPackCreateNestedOneWithoutComponentsInput = {
+  create?: Prisma.XOR<Prisma.TechPackCreateWithoutComponentsInput, Prisma.TechPackUncheckedCreateWithoutComponentsInput>
+  connectOrCreate?: Prisma.TechPackCreateOrConnectWithoutComponentsInput
+  connect?: Prisma.TechPackWhereUniqueInput
+}
+
+export type TechPackUpdateOneRequiredWithoutComponentsNestedInput = {
+  create?: Prisma.XOR<Prisma.TechPackCreateWithoutComponentsInput, Prisma.TechPackUncheckedCreateWithoutComponentsInput>
+  connectOrCreate?: Prisma.TechPackCreateOrConnectWithoutComponentsInput
+  upsert?: Prisma.TechPackUpsertWithoutComponentsInput
+  connect?: Prisma.TechPackWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TechPackUpdateToOneWithWhereWithoutComponentsInput, Prisma.TechPackUpdateWithoutComponentsInput>, Prisma.TechPackUncheckedUpdateWithoutComponentsInput>
+}
+
 export type TechPackCreateWithoutOrderTokenInput = {
   id?: string
-  yarnType: string
-  fabricType: string
-  gsm: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage: runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight: runtime.Decimal | runtime.DecimalJsLike | number | string
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: boolean
   isPrintingRequired?: boolean
   isEmbroideryRequired?: boolean
   preApprovedSampleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  weavingSpec?: Prisma.WeavingSpecificationCreateNestedOneWithoutTechPacksInput
+  dyeingSpec?: Prisma.DyeingSpecificationCreateNestedOneWithoutTechPacksInput
+  components?: Prisma.TechPackComponentCreateNestedManyWithoutTechPackInput
 }
 
 export type TechPackUncheckedCreateWithoutOrderTokenInput = {
   id?: string
-  yarnType: string
-  fabricType: string
-  gsm: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage: runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight: runtime.Decimal | runtime.DecimalJsLike | number | string
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: boolean
   isPrintingRequired?: boolean
   isEmbroideryRequired?: boolean
   preApprovedSampleId?: string | null
+  weavingSpecId?: string | null
+  dyeingSpecId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  components?: Prisma.TechPackComponentUncheckedCreateNestedManyWithoutTechPackInput
 }
 
 export type TechPackCreateOrConnectWithoutOrderTokenInput = {
@@ -632,39 +938,547 @@ export type TechPackUpdateToOneWithWhereWithoutOrderTokenInput = {
 
 export type TechPackUpdateWithoutOrderTokenInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  yarnType?: Prisma.StringFieldUpdateOperationsInput | string
-  fabricType?: Prisma.StringFieldUpdateOperationsInput | string
-  gsm?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weavingSpec?: Prisma.WeavingSpecificationUpdateOneWithoutTechPacksNestedInput
+  dyeingSpec?: Prisma.DyeingSpecificationUpdateOneWithoutTechPacksNestedInput
+  components?: Prisma.TechPackComponentUpdateManyWithoutTechPackNestedInput
 }
 
 export type TechPackUncheckedUpdateWithoutOrderTokenInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  yarnType?: Prisma.StringFieldUpdateOperationsInput | string
-  fabricType?: Prisma.StringFieldUpdateOperationsInput | string
-  gsm?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalYardage?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  requiredYarnWeight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weavingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dyeingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  components?: Prisma.TechPackComponentUncheckedUpdateManyWithoutTechPackNestedInput
+}
+
+export type TechPackCreateWithoutWeavingSpecInput = {
+  id?: string
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: boolean
+  isPrintingRequired?: boolean
+  isEmbroideryRequired?: boolean
+  preApprovedSampleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  orderToken?: Prisma.OrderTokenCreateNestedOneWithoutTechPackInput
+  dyeingSpec?: Prisma.DyeingSpecificationCreateNestedOneWithoutTechPacksInput
+  components?: Prisma.TechPackComponentCreateNestedManyWithoutTechPackInput
+}
+
+export type TechPackUncheckedCreateWithoutWeavingSpecInput = {
+  id?: string
+  orderTokenId?: string | null
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: boolean
+  isPrintingRequired?: boolean
+  isEmbroideryRequired?: boolean
+  preApprovedSampleId?: string | null
+  dyeingSpecId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  components?: Prisma.TechPackComponentUncheckedCreateNestedManyWithoutTechPackInput
+}
+
+export type TechPackCreateOrConnectWithoutWeavingSpecInput = {
+  where: Prisma.TechPackWhereUniqueInput
+  create: Prisma.XOR<Prisma.TechPackCreateWithoutWeavingSpecInput, Prisma.TechPackUncheckedCreateWithoutWeavingSpecInput>
+}
+
+export type TechPackCreateManyWeavingSpecInputEnvelope = {
+  data: Prisma.TechPackCreateManyWeavingSpecInput | Prisma.TechPackCreateManyWeavingSpecInput[]
+  skipDuplicates?: boolean
+}
+
+export type TechPackUpsertWithWhereUniqueWithoutWeavingSpecInput = {
+  where: Prisma.TechPackWhereUniqueInput
+  update: Prisma.XOR<Prisma.TechPackUpdateWithoutWeavingSpecInput, Prisma.TechPackUncheckedUpdateWithoutWeavingSpecInput>
+  create: Prisma.XOR<Prisma.TechPackCreateWithoutWeavingSpecInput, Prisma.TechPackUncheckedCreateWithoutWeavingSpecInput>
+}
+
+export type TechPackUpdateWithWhereUniqueWithoutWeavingSpecInput = {
+  where: Prisma.TechPackWhereUniqueInput
+  data: Prisma.XOR<Prisma.TechPackUpdateWithoutWeavingSpecInput, Prisma.TechPackUncheckedUpdateWithoutWeavingSpecInput>
+}
+
+export type TechPackUpdateManyWithWhereWithoutWeavingSpecInput = {
+  where: Prisma.TechPackScalarWhereInput
+  data: Prisma.XOR<Prisma.TechPackUpdateManyMutationInput, Prisma.TechPackUncheckedUpdateManyWithoutWeavingSpecInput>
+}
+
+export type TechPackScalarWhereInput = {
+  AND?: Prisma.TechPackScalarWhereInput | Prisma.TechPackScalarWhereInput[]
+  OR?: Prisma.TechPackScalarWhereInput[]
+  NOT?: Prisma.TechPackScalarWhereInput | Prisma.TechPackScalarWhereInput[]
+  id?: Prisma.StringFilter<"TechPack"> | string
+  orderTokenId?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  designName?: Prisma.StringFilter<"TechPack"> | string
+  seasonCode?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  totalTargetQuantity?: Prisma.IntFilter<"TechPack"> | number
+  version?: Prisma.IntFilter<"TechPack"> | number
+  isLocked?: Prisma.BoolFilter<"TechPack"> | boolean
+  yarnType?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  fabricType?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  gsm?: Prisma.DecimalNullableFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.DecimalNullableFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.DecimalNullableFilter<"TechPack"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: Prisma.BoolFilter<"TechPack"> | boolean
+  isPrintingRequired?: Prisma.BoolFilter<"TechPack"> | boolean
+  isEmbroideryRequired?: Prisma.BoolFilter<"TechPack"> | boolean
+  preApprovedSampleId?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  weavingSpecId?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  dyeingSpecId?: Prisma.StringNullableFilter<"TechPack"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"TechPack"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"TechPack"> | Date | string
+}
+
+export type TechPackCreateWithoutDyeingSpecInput = {
+  id?: string
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: boolean
+  isPrintingRequired?: boolean
+  isEmbroideryRequired?: boolean
+  preApprovedSampleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  orderToken?: Prisma.OrderTokenCreateNestedOneWithoutTechPackInput
+  weavingSpec?: Prisma.WeavingSpecificationCreateNestedOneWithoutTechPacksInput
+  components?: Prisma.TechPackComponentCreateNestedManyWithoutTechPackInput
+}
+
+export type TechPackUncheckedCreateWithoutDyeingSpecInput = {
+  id?: string
+  orderTokenId?: string | null
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: boolean
+  isPrintingRequired?: boolean
+  isEmbroideryRequired?: boolean
+  preApprovedSampleId?: string | null
+  weavingSpecId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  components?: Prisma.TechPackComponentUncheckedCreateNestedManyWithoutTechPackInput
+}
+
+export type TechPackCreateOrConnectWithoutDyeingSpecInput = {
+  where: Prisma.TechPackWhereUniqueInput
+  create: Prisma.XOR<Prisma.TechPackCreateWithoutDyeingSpecInput, Prisma.TechPackUncheckedCreateWithoutDyeingSpecInput>
+}
+
+export type TechPackCreateManyDyeingSpecInputEnvelope = {
+  data: Prisma.TechPackCreateManyDyeingSpecInput | Prisma.TechPackCreateManyDyeingSpecInput[]
+  skipDuplicates?: boolean
+}
+
+export type TechPackUpsertWithWhereUniqueWithoutDyeingSpecInput = {
+  where: Prisma.TechPackWhereUniqueInput
+  update: Prisma.XOR<Prisma.TechPackUpdateWithoutDyeingSpecInput, Prisma.TechPackUncheckedUpdateWithoutDyeingSpecInput>
+  create: Prisma.XOR<Prisma.TechPackCreateWithoutDyeingSpecInput, Prisma.TechPackUncheckedCreateWithoutDyeingSpecInput>
+}
+
+export type TechPackUpdateWithWhereUniqueWithoutDyeingSpecInput = {
+  where: Prisma.TechPackWhereUniqueInput
+  data: Prisma.XOR<Prisma.TechPackUpdateWithoutDyeingSpecInput, Prisma.TechPackUncheckedUpdateWithoutDyeingSpecInput>
+}
+
+export type TechPackUpdateManyWithWhereWithoutDyeingSpecInput = {
+  where: Prisma.TechPackScalarWhereInput
+  data: Prisma.XOR<Prisma.TechPackUpdateManyMutationInput, Prisma.TechPackUncheckedUpdateManyWithoutDyeingSpecInput>
+}
+
+export type TechPackCreateWithoutComponentsInput = {
+  id?: string
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: boolean
+  isPrintingRequired?: boolean
+  isEmbroideryRequired?: boolean
+  preApprovedSampleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  orderToken?: Prisma.OrderTokenCreateNestedOneWithoutTechPackInput
+  weavingSpec?: Prisma.WeavingSpecificationCreateNestedOneWithoutTechPacksInput
+  dyeingSpec?: Prisma.DyeingSpecificationCreateNestedOneWithoutTechPacksInput
+}
+
+export type TechPackUncheckedCreateWithoutComponentsInput = {
+  id?: string
+  orderTokenId?: string | null
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: boolean
+  isPrintingRequired?: boolean
+  isEmbroideryRequired?: boolean
+  preApprovedSampleId?: string | null
+  weavingSpecId?: string | null
+  dyeingSpecId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TechPackCreateOrConnectWithoutComponentsInput = {
+  where: Prisma.TechPackWhereUniqueInput
+  create: Prisma.XOR<Prisma.TechPackCreateWithoutComponentsInput, Prisma.TechPackUncheckedCreateWithoutComponentsInput>
+}
+
+export type TechPackUpsertWithoutComponentsInput = {
+  update: Prisma.XOR<Prisma.TechPackUpdateWithoutComponentsInput, Prisma.TechPackUncheckedUpdateWithoutComponentsInput>
+  create: Prisma.XOR<Prisma.TechPackCreateWithoutComponentsInput, Prisma.TechPackUncheckedCreateWithoutComponentsInput>
+  where?: Prisma.TechPackWhereInput
+}
+
+export type TechPackUpdateToOneWithWhereWithoutComponentsInput = {
+  where?: Prisma.TechPackWhereInput
+  data: Prisma.XOR<Prisma.TechPackUpdateWithoutComponentsInput, Prisma.TechPackUncheckedUpdateWithoutComponentsInput>
+}
+
+export type TechPackUpdateWithoutComponentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderToken?: Prisma.OrderTokenUpdateOneWithoutTechPackNestedInput
+  weavingSpec?: Prisma.WeavingSpecificationUpdateOneWithoutTechPacksNestedInput
+  dyeingSpec?: Prisma.DyeingSpecificationUpdateOneWithoutTechPacksNestedInput
 }
 
+export type TechPackUncheckedUpdateWithoutComponentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderTokenId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weavingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dyeingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TechPackCreateManyWeavingSpecInput = {
+  id?: string
+  orderTokenId?: string | null
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: boolean
+  isPrintingRequired?: boolean
+  isEmbroideryRequired?: boolean
+  preApprovedSampleId?: string | null
+  dyeingSpecId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TechPackUpdateWithoutWeavingSpecInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderToken?: Prisma.OrderTokenUpdateOneWithoutTechPackNestedInput
+  dyeingSpec?: Prisma.DyeingSpecificationUpdateOneWithoutTechPacksNestedInput
+  components?: Prisma.TechPackComponentUpdateManyWithoutTechPackNestedInput
+}
+
+export type TechPackUncheckedUpdateWithoutWeavingSpecInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderTokenId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dyeingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  components?: Prisma.TechPackComponentUncheckedUpdateManyWithoutTechPackNestedInput
+}
+
+export type TechPackUncheckedUpdateManyWithoutWeavingSpecInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderTokenId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dyeingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TechPackCreateManyDyeingSpecInput = {
+  id?: string
+  orderTokenId?: string | null
+  designName?: string
+  seasonCode?: string | null
+  totalTargetQuantity?: number
+  version?: number
+  isLocked?: boolean
+  yarnType?: string | null
+  fabricType?: string | null
+  gsm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: boolean
+  isPrintingRequired?: boolean
+  isEmbroideryRequired?: boolean
+  preApprovedSampleId?: string | null
+  weavingSpecId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TechPackUpdateWithoutDyeingSpecInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderToken?: Prisma.OrderTokenUpdateOneWithoutTechPackNestedInput
+  weavingSpec?: Prisma.WeavingSpecificationUpdateOneWithoutTechPacksNestedInput
+  components?: Prisma.TechPackComponentUpdateManyWithoutTechPackNestedInput
+}
+
+export type TechPackUncheckedUpdateWithoutDyeingSpecInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderTokenId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weavingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  components?: Prisma.TechPackComponentUncheckedUpdateManyWithoutTechPackNestedInput
+}
+
+export type TechPackUncheckedUpdateManyWithoutDyeingSpecInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderTokenId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designName?: Prisma.StringFieldUpdateOperationsInput | string
+  seasonCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalTargetQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  yarnType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fabricType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gsm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalYardage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiredYarnWeight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  requiresYarnTwisting?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPrintingRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isEmbroideryRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preApprovedSampleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weavingSpecId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type TechPackCountOutputType
+ */
+
+export type TechPackCountOutputType = {
+  components: number
+}
+
+export type TechPackCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  components?: boolean | TechPackCountOutputTypeCountComponentsArgs
+}
+
+/**
+ * TechPackCountOutputType without action
+ */
+export type TechPackCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TechPackCountOutputType
+   */
+  select?: Prisma.TechPackCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TechPackCountOutputType without action
+ */
+export type TechPackCountOutputTypeCountComponentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TechPackComponentWhereInput
+}
 
 
 export type TechPackSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   orderTokenId?: boolean
+  designName?: boolean
+  seasonCode?: boolean
+  totalTargetQuantity?: boolean
+  version?: boolean
+  isLocked?: boolean
   yarnType?: boolean
   fabricType?: boolean
   gsm?: boolean
@@ -674,14 +1488,25 @@ export type TechPackSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   isPrintingRequired?: boolean
   isEmbroideryRequired?: boolean
   preApprovedSampleId?: boolean
+  weavingSpecId?: boolean
+  dyeingSpecId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  orderToken?: boolean | Prisma.OrderTokenDefaultArgs<ExtArgs>
+  orderToken?: boolean | Prisma.TechPack$orderTokenArgs<ExtArgs>
+  weavingSpec?: boolean | Prisma.TechPack$weavingSpecArgs<ExtArgs>
+  dyeingSpec?: boolean | Prisma.TechPack$dyeingSpecArgs<ExtArgs>
+  components?: boolean | Prisma.TechPack$componentsArgs<ExtArgs>
+  _count?: boolean | Prisma.TechPackCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["techPack"]>
 
 export type TechPackSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   orderTokenId?: boolean
+  designName?: boolean
+  seasonCode?: boolean
+  totalTargetQuantity?: boolean
+  version?: boolean
+  isLocked?: boolean
   yarnType?: boolean
   fabricType?: boolean
   gsm?: boolean
@@ -691,14 +1516,23 @@ export type TechPackSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   isPrintingRequired?: boolean
   isEmbroideryRequired?: boolean
   preApprovedSampleId?: boolean
+  weavingSpecId?: boolean
+  dyeingSpecId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  orderToken?: boolean | Prisma.OrderTokenDefaultArgs<ExtArgs>
+  orderToken?: boolean | Prisma.TechPack$orderTokenArgs<ExtArgs>
+  weavingSpec?: boolean | Prisma.TechPack$weavingSpecArgs<ExtArgs>
+  dyeingSpec?: boolean | Prisma.TechPack$dyeingSpecArgs<ExtArgs>
 }, ExtArgs["result"]["techPack"]>
 
 export type TechPackSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   orderTokenId?: boolean
+  designName?: boolean
+  seasonCode?: boolean
+  totalTargetQuantity?: boolean
+  version?: boolean
+  isLocked?: boolean
   yarnType?: boolean
   fabricType?: boolean
   gsm?: boolean
@@ -708,14 +1542,23 @@ export type TechPackSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   isPrintingRequired?: boolean
   isEmbroideryRequired?: boolean
   preApprovedSampleId?: boolean
+  weavingSpecId?: boolean
+  dyeingSpecId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  orderToken?: boolean | Prisma.OrderTokenDefaultArgs<ExtArgs>
+  orderToken?: boolean | Prisma.TechPack$orderTokenArgs<ExtArgs>
+  weavingSpec?: boolean | Prisma.TechPack$weavingSpecArgs<ExtArgs>
+  dyeingSpec?: boolean | Prisma.TechPack$dyeingSpecArgs<ExtArgs>
 }, ExtArgs["result"]["techPack"]>
 
 export type TechPackSelectScalar = {
   id?: boolean
   orderTokenId?: boolean
+  designName?: boolean
+  seasonCode?: boolean
+  totalTargetQuantity?: boolean
+  version?: boolean
+  isLocked?: boolean
   yarnType?: boolean
   fabricType?: boolean
   gsm?: boolean
@@ -725,38 +1568,58 @@ export type TechPackSelectScalar = {
   isPrintingRequired?: boolean
   isEmbroideryRequired?: boolean
   preApprovedSampleId?: boolean
+  weavingSpecId?: boolean
+  dyeingSpecId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type TechPackOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderTokenId" | "yarnType" | "fabricType" | "gsm" | "totalYardage" | "requiredYarnWeight" | "requiresYarnTwisting" | "isPrintingRequired" | "isEmbroideryRequired" | "preApprovedSampleId" | "createdAt" | "updatedAt", ExtArgs["result"]["techPack"]>
+export type TechPackOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderTokenId" | "designName" | "seasonCode" | "totalTargetQuantity" | "version" | "isLocked" | "yarnType" | "fabricType" | "gsm" | "totalYardage" | "requiredYarnWeight" | "requiresYarnTwisting" | "isPrintingRequired" | "isEmbroideryRequired" | "preApprovedSampleId" | "weavingSpecId" | "dyeingSpecId" | "createdAt" | "updatedAt", ExtArgs["result"]["techPack"]>
 export type TechPackInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  orderToken?: boolean | Prisma.OrderTokenDefaultArgs<ExtArgs>
+  orderToken?: boolean | Prisma.TechPack$orderTokenArgs<ExtArgs>
+  weavingSpec?: boolean | Prisma.TechPack$weavingSpecArgs<ExtArgs>
+  dyeingSpec?: boolean | Prisma.TechPack$dyeingSpecArgs<ExtArgs>
+  components?: boolean | Prisma.TechPack$componentsArgs<ExtArgs>
+  _count?: boolean | Prisma.TechPackCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TechPackIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  orderToken?: boolean | Prisma.OrderTokenDefaultArgs<ExtArgs>
+  orderToken?: boolean | Prisma.TechPack$orderTokenArgs<ExtArgs>
+  weavingSpec?: boolean | Prisma.TechPack$weavingSpecArgs<ExtArgs>
+  dyeingSpec?: boolean | Prisma.TechPack$dyeingSpecArgs<ExtArgs>
 }
 export type TechPackIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  orderToken?: boolean | Prisma.OrderTokenDefaultArgs<ExtArgs>
+  orderToken?: boolean | Prisma.TechPack$orderTokenArgs<ExtArgs>
+  weavingSpec?: boolean | Prisma.TechPack$weavingSpecArgs<ExtArgs>
+  dyeingSpec?: boolean | Prisma.TechPack$dyeingSpecArgs<ExtArgs>
 }
 
 export type $TechPackPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TechPack"
   objects: {
-    orderToken: Prisma.$OrderTokenPayload<ExtArgs>
+    orderToken: Prisma.$OrderTokenPayload<ExtArgs> | null
+    weavingSpec: Prisma.$WeavingSpecificationPayload<ExtArgs> | null
+    dyeingSpec: Prisma.$DyeingSpecificationPayload<ExtArgs> | null
+    components: Prisma.$TechPackComponentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    orderTokenId: string
-    yarnType: string
-    fabricType: string
-    gsm: runtime.Decimal
-    totalYardage: runtime.Decimal
-    requiredYarnWeight: runtime.Decimal
+    orderTokenId: string | null
+    designName: string
+    seasonCode: string | null
+    totalTargetQuantity: number
+    version: number
+    isLocked: boolean
+    yarnType: string | null
+    fabricType: string | null
+    gsm: runtime.Decimal | null
+    totalYardage: runtime.Decimal | null
+    requiredYarnWeight: runtime.Decimal | null
     requiresYarnTwisting: boolean
     isPrintingRequired: boolean
     isEmbroideryRequired: boolean
     preApprovedSampleId: string | null
+    weavingSpecId: string | null
+    dyeingSpecId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["techPack"]>
@@ -1153,7 +2016,10 @@ readonly fields: TechPackFieldRefs;
  */
 export interface Prisma__TechPackClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  orderToken<T extends Prisma.OrderTokenDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderTokenDefaultArgs<ExtArgs>>): Prisma.Prisma__OrderTokenClient<runtime.Types.Result.GetResult<Prisma.$OrderTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  orderToken<T extends Prisma.TechPack$orderTokenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TechPack$orderTokenArgs<ExtArgs>>): Prisma.Prisma__OrderTokenClient<runtime.Types.Result.GetResult<Prisma.$OrderTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  weavingSpec<T extends Prisma.TechPack$weavingSpecArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TechPack$weavingSpecArgs<ExtArgs>>): Prisma.Prisma__WeavingSpecificationClient<runtime.Types.Result.GetResult<Prisma.$WeavingSpecificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  dyeingSpec<T extends Prisma.TechPack$dyeingSpecArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TechPack$dyeingSpecArgs<ExtArgs>>): Prisma.Prisma__DyeingSpecificationClient<runtime.Types.Result.GetResult<Prisma.$DyeingSpecificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  components<T extends Prisma.TechPack$componentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TechPack$componentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TechPackComponentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1185,6 +2051,11 @@ export interface Prisma__TechPackClient<T, Null = never, ExtArgs extends runtime
 export interface TechPackFieldRefs {
   readonly id: Prisma.FieldRef<"TechPack", 'String'>
   readonly orderTokenId: Prisma.FieldRef<"TechPack", 'String'>
+  readonly designName: Prisma.FieldRef<"TechPack", 'String'>
+  readonly seasonCode: Prisma.FieldRef<"TechPack", 'String'>
+  readonly totalTargetQuantity: Prisma.FieldRef<"TechPack", 'Int'>
+  readonly version: Prisma.FieldRef<"TechPack", 'Int'>
+  readonly isLocked: Prisma.FieldRef<"TechPack", 'Boolean'>
   readonly yarnType: Prisma.FieldRef<"TechPack", 'String'>
   readonly fabricType: Prisma.FieldRef<"TechPack", 'String'>
   readonly gsm: Prisma.FieldRef<"TechPack", 'Decimal'>
@@ -1194,6 +2065,8 @@ export interface TechPackFieldRefs {
   readonly isPrintingRequired: Prisma.FieldRef<"TechPack", 'Boolean'>
   readonly isEmbroideryRequired: Prisma.FieldRef<"TechPack", 'Boolean'>
   readonly preApprovedSampleId: Prisma.FieldRef<"TechPack", 'String'>
+  readonly weavingSpecId: Prisma.FieldRef<"TechPack", 'String'>
+  readonly dyeingSpecId: Prisma.FieldRef<"TechPack", 'String'>
   readonly createdAt: Prisma.FieldRef<"TechPack", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"TechPack", 'DateTime'>
 }
@@ -1594,6 +2467,87 @@ export type TechPackDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many TechPacks to delete.
    */
   limit?: number
+}
+
+/**
+ * TechPack.orderToken
+ */
+export type TechPack$orderTokenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderToken
+   */
+  select?: Prisma.OrderTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderToken
+   */
+  omit?: Prisma.OrderTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderTokenInclude<ExtArgs> | null
+  where?: Prisma.OrderTokenWhereInput
+}
+
+/**
+ * TechPack.weavingSpec
+ */
+export type TechPack$weavingSpecArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WeavingSpecification
+   */
+  select?: Prisma.WeavingSpecificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WeavingSpecification
+   */
+  omit?: Prisma.WeavingSpecificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeavingSpecificationInclude<ExtArgs> | null
+  where?: Prisma.WeavingSpecificationWhereInput
+}
+
+/**
+ * TechPack.dyeingSpec
+ */
+export type TechPack$dyeingSpecArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DyeingSpecification
+   */
+  select?: Prisma.DyeingSpecificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DyeingSpecification
+   */
+  omit?: Prisma.DyeingSpecificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DyeingSpecificationInclude<ExtArgs> | null
+  where?: Prisma.DyeingSpecificationWhereInput
+}
+
+/**
+ * TechPack.components
+ */
+export type TechPack$componentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TechPackComponent
+   */
+  select?: Prisma.TechPackComponentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TechPackComponent
+   */
+  omit?: Prisma.TechPackComponentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TechPackComponentInclude<ExtArgs> | null
+  where?: Prisma.TechPackComponentWhereInput
+  orderBy?: Prisma.TechPackComponentOrderByWithRelationInput | Prisma.TechPackComponentOrderByWithRelationInput[]
+  cursor?: Prisma.TechPackComponentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TechPackComponentScalarFieldEnum | Prisma.TechPackComponentScalarFieldEnum[]
 }
 
 /**

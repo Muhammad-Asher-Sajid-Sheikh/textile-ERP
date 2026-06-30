@@ -12,6 +12,7 @@ import { checkApproved } from './middleware/rbac.js';
 //Routes
 import authRoutes from './routes/auth.js';
 import productionRoutes from './routes/production.js';
+import merchandiseRoutes from './routes/merchandise.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -77,6 +78,9 @@ app.use(checkApproved);
 
 // Production pipeline routes
 app.use('/api/production', productionRoutes);
+
+// Merchandise management routes
+app.use('/api/merchandise', merchandiseRoutes);
 
 // Example protected routes (add your business logic routes here)
 // app.use('/api/fabrics', fabricRoutes);

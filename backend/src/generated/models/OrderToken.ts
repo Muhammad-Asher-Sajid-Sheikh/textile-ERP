@@ -426,6 +426,11 @@ export type OrderTokenMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type OrderTokenNullableScalarRelationFilter = {
+  is?: Prisma.OrderTokenWhereInput | null
+  isNot?: Prisma.OrderTokenWhereInput | null
+}
+
 export type OrderTokenScalarRelationFilter = {
   is?: Prisma.OrderTokenWhereInput
   isNot?: Prisma.OrderTokenWhereInput
@@ -445,10 +450,12 @@ export type OrderTokenCreateNestedOneWithoutTechPackInput = {
   connect?: Prisma.OrderTokenWhereUniqueInput
 }
 
-export type OrderTokenUpdateOneRequiredWithoutTechPackNestedInput = {
+export type OrderTokenUpdateOneWithoutTechPackNestedInput = {
   create?: Prisma.XOR<Prisma.OrderTokenCreateWithoutTechPackInput, Prisma.OrderTokenUncheckedCreateWithoutTechPackInput>
   connectOrCreate?: Prisma.OrderTokenCreateOrConnectWithoutTechPackInput
   upsert?: Prisma.OrderTokenUpsertWithoutTechPackInput
+  disconnect?: Prisma.OrderTokenWhereInput | boolean
+  delete?: Prisma.OrderTokenWhereInput | boolean
   connect?: Prisma.OrderTokenWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrderTokenUpdateToOneWithWhereWithoutTechPackInput, Prisma.OrderTokenUpdateWithoutTechPackInput>, Prisma.OrderTokenUncheckedUpdateWithoutTechPackInput>
 }

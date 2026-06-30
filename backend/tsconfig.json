@@ -1,12 +1,17 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
+    "allowJs": true,     // ✅ Allows importing JavaScript files
+    "checkJs": false,
     
     "module": "ESNext",
     "moduleResolution": "bundler",
     "target": "ES2023",
     "esModuleInterop": true,
     "ignoreDeprecations": "6.0",
+
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
     // File Layout
     // "rootDir": "./src",
     // "outDir": "./dist",

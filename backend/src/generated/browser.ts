@@ -112,3 +112,28 @@ export type DiscrepancyAlert = Prisma.DiscrepancyAlertModel
  * 
  */
 export type ClaimDispute = Prisma.ClaimDisputeModel
+/**
+ * Model AuditLogs
+ * 
+ */
+export type AuditLogs = Prisma.AuditLogsModel
+/**
+ * Model WeavingSpecification
+ * 
+ */
+export type WeavingSpecification = Prisma.WeavingSpecificationModel
+/**
+ * Model DyeingSpecification
+ * 
+ */
+export type DyeingSpecification = Prisma.DyeingSpecificationModel
+/**
+ * Model PrintingSpecification
+ * 
+ */
+export type PrintingSpecification = Prisma.PrintingSpecificationModel
+/**
+ * Model TechPackComponent
+ * 
+ */
+export type TechPackComponent = Prisma.TechPackComponentModel

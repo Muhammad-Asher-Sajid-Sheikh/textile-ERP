@@ -69,7 +69,12 @@ export const ModelName = {
   QcInspection: 'QcInspection',
   PreShippingSample: 'PreShippingSample',
   DiscrepancyAlert: 'DiscrepancyAlert',
-  ClaimDispute: 'ClaimDispute'
+  ClaimDispute: 'ClaimDispute',
+  AuditLogs: 'AuditLogs',
+  WeavingSpecification: 'WeavingSpecification',
+  DyeingSpecification: 'DyeingSpecification',
+  PrintingSpecification: 'PrintingSpecification',
+  TechPackComponent: 'TechPackComponent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -150,6 +155,11 @@ export type OrderTokenScalarFieldEnum = (typeof OrderTokenScalarFieldEnum)[keyof
 export const TechPackScalarFieldEnum = {
   id: 'id',
   orderTokenId: 'orderTokenId',
+  designName: 'designName',
+  seasonCode: 'seasonCode',
+  totalTargetQuantity: 'totalTargetQuantity',
+  version: 'version',
+  isLocked: 'isLocked',
   yarnType: 'yarnType',
   fabricType: 'fabricType',
   gsm: 'gsm',
@@ -159,6 +169,8 @@ export const TechPackScalarFieldEnum = {
   isPrintingRequired: 'isPrintingRequired',
   isEmbroideryRequired: 'isEmbroideryRequired',
   preApprovedSampleId: 'preApprovedSampleId',
+  weavingSpecId: 'weavingSpecId',
+  dyeingSpecId: 'dyeingSpecId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -415,6 +427,80 @@ export const ClaimDisputeScalarFieldEnum = {
 } as const
 
 export type ClaimDisputeScalarFieldEnum = (typeof ClaimDisputeScalarFieldEnum)[keyof typeof ClaimDisputeScalarFieldEnum]
+
+
+export const AuditLogsScalarFieldEnum = {
+  id: 'id',
+  table: 'table',
+  operation: 'operation',
+  recordId: 'recordId',
+  previousState: 'previousState',
+  newState: 'newState',
+  changedBy: 'changedBy',
+  timestamp: 'timestamp'
+} as const
+
+export type AuditLogsScalarFieldEnum = (typeof AuditLogsScalarFieldEnum)[keyof typeof AuditLogsScalarFieldEnum]
+
+
+export const WeavingSpecificationScalarFieldEnum = {
+  id: 'id',
+  loomType: 'loomType',
+  warpYarnCount: 'warpYarnCount',
+  weftYarnCount: 'weftYarnCount',
+  pileYarnCount: 'pileYarnCount',
+  picksPerInch: 'picksPerInch',
+  endsPerInch: 'endsPerInch',
+  terryRatio: 'terryRatio',
+  technicalNotes: 'technicalNotes',
+  createdAt: 'createdAt'
+} as const
+
+export type WeavingSpecificationScalarFieldEnum = (typeof WeavingSpecificationScalarFieldEnum)[keyof typeof WeavingSpecificationScalarFieldEnum]
+
+
+export const DyeingSpecificationScalarFieldEnum = {
+  id: 'id',
+  dyeType: 'dyeType',
+  colorName: 'colorName',
+  pantoneCode: 'pantoneCode',
+  chemicalRestraints: 'chemicalRestraints',
+  targetShrinkagePct: 'targetShrinkagePct',
+  createdAt: 'createdAt'
+} as const
+
+export type DyeingSpecificationScalarFieldEnum = (typeof DyeingSpecificationScalarFieldEnum)[keyof typeof DyeingSpecificationScalarFieldEnum]
+
+
+export const PrintingSpecificationScalarFieldEnum = {
+  id: 'id',
+  printMethod: 'printMethod',
+  placementArea: 'placementArea',
+  colorCount: 'colorCount',
+  createdAt: 'createdAt'
+} as const
+
+export type PrintingSpecificationScalarFieldEnum = (typeof PrintingSpecificationScalarFieldEnum)[keyof typeof PrintingSpecificationScalarFieldEnum]
+
+
+export const TechPackComponentScalarFieldEnum = {
+  id: 'id',
+  techPackId: 'techPackId',
+  componentName: 'componentName',
+  cutLengthInches: 'cutLengthInches',
+  cutWidthInches: 'cutWidthInches',
+  finishedLengthCms: 'finishedLengthCms',
+  finishedWidthCms: 'finishedWidthCms',
+  targetGsm: 'targetGsm',
+  targetPieceWeightGm: 'targetPieceWeightGm',
+  stitchingType: 'stitchingType',
+  borderStructure: 'borderStructure',
+  cartonPackingRatio: 'cartonPackingRatio',
+  printingSpecId: 'printingSpecId',
+  createdAt: 'createdAt'
+} as const
+
+export type TechPackComponentScalarFieldEnum = (typeof TechPackComponentScalarFieldEnum)[keyof typeof TechPackComponentScalarFieldEnum]
 
 
 export const SortOrder = {
